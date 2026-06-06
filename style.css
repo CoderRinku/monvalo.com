@@ -549,7 +549,7 @@ body.bn-active .hero-inner h1 {
 
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2.5rem;
   margin-bottom: 4rem;
 }
@@ -924,7 +924,7 @@ body.bn-active .testimonial-item p {
    ========================================================================== */
 .tips-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2.5rem;
 }
 
@@ -1037,7 +1037,7 @@ body.bn-active .testimonial-item p {
 
 .blog-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2.5rem;
 }
 
@@ -1278,7 +1278,7 @@ body.bn-active .reader-header h1 {
    ========================================================================== */
 .shop-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 3rem;
   margin-bottom: 4rem;
 }
@@ -1940,6 +1940,13 @@ footer {
   
   body.bn-active .reader-header h1 {
     font-size: 2.4rem;
+  }
+
+  .reader-article-content table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
