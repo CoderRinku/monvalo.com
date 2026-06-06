@@ -1960,3 +1960,57 @@ footer {
     transform: translateY(0);
   }
 }
+
+/* ==========================================================================
+   INTERACTIVE TOOLS STYLING
+   ========================================================================== */
+.comfort-card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.btn-comfort-mood.active {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  border-color: var(--color-primary);
+}
+
+/* Custom mixer slider styles */
+.mixer-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  background: var(--border-color);
+  border-radius: 10px;
+  outline: none;
+  transition: background 0.3s;
+}
+
+.mixer-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  cursor: pointer;
+  box-shadow: 0 0 8px var(--glow-color);
+  transition: transform 0.2s;
+}
+
+.mixer-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.mixer-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-primary);
+  cursor: pointer;
+  box-shadow: 0 0 8px var(--glow-color);
+  transition: transform 0.2s;
+}
+
+.mixer-slider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+}

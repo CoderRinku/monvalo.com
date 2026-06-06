@@ -626,6 +626,339 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ==========================================================================
+  // TOOL 1: WORRY BALLOON
+  // ==========================================================================
+  const worryForm = document.getElementById("worry-form");
+  const worryInput = document.getElementById("worry-input");
+  const worryBalloon = document.getElementById("worry-balloon");
+  const worryBalloonText = document.getElementById("worry-balloon-text");
+  const worrySuccess = document.getElementById("worry-success-msg");
+  const skyPlaceholder = document.getElementById("sky-placeholder-text");
+
+  if (worryForm && worryInput && worryBalloon && worryBalloonText) {
+    worryForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      
+      const text = worryInput.value.trim();
+      if (!text) return;
+
+      // Set balloon text
+      worryBalloonText.innerText = text;
+      
+      // Reset sky and status
+      skyPlaceholder.style.display = "none";
+      worrySuccess.style.display = "none";
+
+      // Re-initialize balloon start position
+      worryBalloon.style.display = "flex";
+      worryBalloon.style.bottom = "-120px";
+      worryBalloon.style.left = "50%";
+      worryBalloon.style.transform = "translateX(-50%) scale(1)";
+      worryBalloon.style.opacity = "1";
+      worryBalloon.style.transition = "none";
+
+      // Animate floating up
+      setTimeout(() => {
+        worryBalloon.style.transition = "bottom 5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 5s ease, transform 5s ease";
+        worryBalloon.style.bottom = "220px";
+        worryBalloon.style.opacity = "0";
+        worryBalloon.style.transform = "translateX(-50%) scale(0.3)";
+      }, 100);
+
+      // Clean up after animation finishes
+      setTimeout(() => {
+        worryBalloon.style.display = "none";
+        worrySuccess.style.display = "block";
+        skyPlaceholder.style.display = "block";
+        worryInput.value = "";
+      }, 5100);
+    });
+  }
+
+  // ==========================================================================
+  // TOOL 2: GROUNDING WIZARD
+  // ==========================================================================
+  const btnGroundStart = document.getElementById("btn-grounding-start");
+  const btnGroundRestart = document.getElementById("btn-grounding-restart");
+  const groundingScreens = {
+    start: document.getElementById("grounding-screen-start"),
+    step5: document.getElementById("grounding-screen-step5"),
+    step4: document.getElementById("grounding-screen-step4"),
+    step3: document.getElementById("grounding-screen-step3"),
+    step2: document.getElementById("grounding-screen-step2"),
+    step1: document.getElementById("grounding-screen-step1"),
+    finish: document.getElementById("grounding-screen-finish")
+  };
+
+  function showGroundingScreen(activeKey) {
+    Object.keys(groundingScreens).forEach((key) => {
+      const screen = groundingScreens[key];
+      if (screen) {
+        screen.style.display = key === activeKey ? "block" : "none";
+      }
+    });
+  }
+
+  if (btnGroundStart) {
+    btnGroundStart.addEventListener("click", () => {
+      showGroundingScreen("step5");
+    });
+  }
+  if (btnGroundRestart) {
+    btnGroundRestart.addEventListener("click", () => {
+      showGroundingScreen("step5");
+    });
+  }
+
+  document.querySelectorAll(".btn-grounding-next").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const nextStep = btn.getAttribute("data-next");
+      showGroundingScreen(nextStep);
+    });
+  });
+
+  // ==========================================================================
+  // TOOL 3: MOOD COMFORT CARDS
+  // ==========================================================================
+  const comfortCardInner = document.getElementById("comfort-card-inner-box");
+  const comfortLetterText = document.getElementById("comfort-letter-text");
+  const comfortMoodBtns = document.querySelectorAll(".btn-comfort-mood");
+
+  if (comfortCardInner) {
+    // Click on envelope flips it
+    comfortCardInner.addEventListener("click", () => {
+      comfortCardInner.classList.toggle("flipped");
+    });
+  }
+
+  comfortMoodBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      comfortMoodBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const mood = btn.getAttribute("data-mood");
+      const letterKey = "toolComfortLetter" + mood.charAt(0).toUpperCase() + mood.slice(1);
+      
+      // If card is already flipped to back, flip it back to front first, change text, then let user open it
+      if (comfortCardInner && comfortCardInner.classList.contains("flipped")) {
+        comfortCardInner.classList.remove("flipped");
+        setTimeout(() => {
+          if (comfortLetterText) {
+            comfortLetterText.innerHTML = translations[currentLang][letterKey];
+          }
+        }, 300);
+      } else {
+        if (comfortLetterText) {
+          comfortLetterText.innerHTML = translations[currentLang][letterKey];
+        }
+      }
+    });
+  });
+
+  // ==========================================================================
+  // TOOL 4: MEDITATIVE SOUND MIXER (Web Audio API)
+  // ==========================================================================
+  let audioCtx = null;
+  let mixerPlaying = false;
+
+  // Nodes holders
+  let rainSource = null, rainGain = null;
+  let oceanSource = null, oceanGain = null, oceanLfo = null;
+  let droneOscs = [], droneGain = null;
+
+  const btnMixerToggle = document.getElementById("btn-mixer-toggle");
+  const mixerBtnText = document.getElementById("mixer-btn-text");
+  const mixerPlayIcon = document.getElementById("mixer-play-icon");
+
+  const sliderRain = document.getElementById("slider-rain");
+  const sliderOcean = document.getElementById("slider-ocean");
+  const sliderMeditate = document.getElementById("slider-meditate");
+
+  const volRainVal = document.getElementById("vol-rain-val");
+  const volOceanVal = document.getElementById("vol-ocean-val");
+  const volMeditateVal = document.getElementById("vol-meditate-val");
+
+  // Helper: Create 2s white noise buffer
+  function createNoiseBuffer() {
+    const bufferSize = audioCtx.sampleRate * 2;
+    const buffer = audioCtx.createBuffer(2, bufferSize, audioCtx.sampleRate);
+    for (let channel = 0; channel < buffer.numberOfChannels; channel++) {
+      const data = buffer.getChannelData(channel);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = Math.random() * 2 - 1;
+      }
+    }
+    return buffer;
+  }
+
+  function initAudio() {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+
+  function startMixer() {
+    if (!audioCtx) initAudio();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+
+    // 1. Rain setup
+    const noiseBuffer = createNoiseBuffer();
+    rainSource = audioCtx.createBufferSource();
+    rainSource.buffer = noiseBuffer;
+    rainSource.loop = true;
+
+    const rainFilter = audioCtx.createBiquadFilter();
+    rainFilter.type = "lowpass";
+    rainFilter.frequency.value = 1000; // soft rain cutoff
+
+    rainGain = audioCtx.createGain();
+    rainGain.gain.value = (sliderRain ? sliderRain.value : 0) / 100 * 0.15; // Limit max rain volume
+
+    rainSource.connect(rainFilter);
+    rainFilter.connect(rainGain);
+    rainGain.connect(audioCtx.destination);
+    rainSource.start(0);
+
+    // 2. Ocean Waves setup
+    oceanSource = audioCtx.createBufferSource();
+    oceanSource.buffer = noiseBuffer;
+    oceanSource.loop = true;
+
+    const oceanFilter = audioCtx.createBiquadFilter();
+    oceanFilter.type = "lowpass";
+    oceanFilter.frequency.value = 500; // deep wave rumble
+
+    oceanGain = audioCtx.createGain();
+    oceanGain.gain.value = 0.05; // Base gain
+
+    // Wave swell LFO
+    oceanLfo = audioCtx.createOscillator();
+    oceanLfo.frequency.value = 0.08; // 12 second wave cycles
+    
+    const lfoGain = audioCtx.createGain();
+    lfoGain.gain.value = 0.1; // modulation amplitude
+
+    oceanLfo.connect(lfoGain);
+    lfoGain.connect(oceanGain.gain); // Modulate wave volume
+
+    // Master volume scaler for ocean
+    const oceanMasterGain = audioCtx.createGain();
+    oceanMasterGain.gain.value = (sliderOcean ? sliderOcean.value : 0) / 100 * 1.5;
+
+    oceanSource.connect(oceanFilter);
+    oceanFilter.connect(oceanGain);
+    oceanGain.connect(oceanMasterGain);
+    oceanMasterGain.connect(audioCtx.destination);
+
+    oceanLfo.start(0);
+    oceanSource.start(0);
+
+    // Keep reference to update later
+    oceanGain.masterNode = oceanMasterGain;
+
+    // 3. Meditative Drone setup (Sine wave perfect chord: 110Hz, 165Hz, 220Hz)
+    droneGain = audioCtx.createGain();
+    droneGain.gain.value = (sliderMeditate ? sliderMeditate.value : 0) / 100 * 0.25;
+
+    const frequencies = [110, 165, 220];
+    droneOscs = frequencies.map((freq) => {
+      const osc = audioCtx.createOscillator();
+      osc.type = "sine";
+      osc.frequency.value = freq;
+
+      const oscGain = audioCtx.createGain();
+      oscGain.gain.value = 0.15;
+
+      osc.connect(oscGain);
+      oscGain.connect(droneGain);
+      osc.start(0);
+      return osc;
+    });
+
+    // Slow lowpass to make it warmer
+    const droneFilter = audioCtx.createBiquadFilter();
+    droneFilter.type = "lowpass";
+    droneFilter.frequency.value = 350;
+
+    droneGain.connect(droneFilter);
+    droneFilter.connect(audioCtx.destination);
+  }
+
+  function stopMixer() {
+    if (rainSource) {
+      try { rainSource.stop(); } catch(e){}
+      rainSource.disconnect();
+    }
+    if (oceanSource) {
+      try { oceanSource.stop(); } catch(e){}
+      oceanSource.disconnect();
+    }
+    if (oceanLfo) {
+      try { oceanLfo.stop(); } catch(e){}
+      oceanLfo.disconnect();
+    }
+    droneOscs.forEach((osc) => {
+      try { osc.stop(); } catch(e){}
+      osc.disconnect();
+    });
+    droneOscs = [];
+    if (audioCtx) {
+      audioCtx.suspend();
+    }
+  }
+
+  if (btnMixerToggle) {
+    btnMixerToggle.addEventListener("click", () => {
+      if (!mixerPlaying) {
+        startMixer();
+        mixerPlaying = true;
+        mixerBtnText.innerText = currentLang === "bn" ? "সুর বন্ধ করো" : "Stop Mixer";
+        if (mixerPlayIcon) {
+          mixerPlayIcon.innerHTML = `<rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>`;
+        }
+      } else {
+        stopMixer();
+        mixerPlaying = false;
+        mixerBtnText.innerText = currentLang === "bn" ? "সুর বাজাও" : "Play Mixer";
+        if (mixerPlayIcon) {
+          mixerPlayIcon.innerHTML = `<polygon points="5 3 19 12 5 21 5 3"></polygon>`;
+        }
+      }
+    });
+  }
+
+  // Sliders binding
+  if (sliderRain) {
+    sliderRain.addEventListener("input", () => {
+      const val = sliderRain.value;
+      if (volRainVal) volRainVal.innerText = `${val}%`;
+      if (rainGain && audioCtx) {
+        rainGain.gain.linearRampToValueAtTime(val / 100 * 0.15, audioCtx.currentTime + 0.1);
+      }
+    });
+  }
+
+  // Ocean slider
+  if (sliderOcean) {
+    sliderOcean.addEventListener("input", () => {
+      const val = sliderOcean.value;
+      if (volOceanVal) volOceanVal.innerText = `${val}%`;
+      if (oceanGain && oceanGain.masterNode && audioCtx) {
+        oceanGain.masterNode.gain.linearRampToValueAtTime(val / 100 * 1.5, audioCtx.currentTime + 0.1);
+      }
+    });
+  }
+
+  // Meditate slider
+  if (sliderMeditate) {
+    sliderMeditate.addEventListener("input", () => {
+      const val = sliderMeditate.value;
+      if (volMeditateVal) volMeditateVal.innerText = `${val}%`;
+      if (droneGain && audioCtx) {
+        droneGain.gain.linearRampToValueAtTime(val / 100 * 0.25, audioCtx.currentTime + 0.1);
+      }
+    });
+  }
+
+  // ==========================================================================
   // INITIALIZATION
   // ==========================================================================
   // Initialize Routing

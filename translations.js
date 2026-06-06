@@ -12,6 +12,7 @@ const translations = {
     navShop: "বইঘর",
     navAbout: "আমাদের কথা",
     navContact: "যোগাযোগ",
+    navTools: "মন ভালো করার টুলস",
     toggleLanguage: "EN",
     footerText: "মন ভালো হোক, মন ভালো থাক। © ২০২৬ মনভালো.কম",
     footerDisclaimer: "সতর্কতা: আমরা কোনো পেশাদার চিকিৎসা পরামর্শ বা ডাক্তার নই। তীব্র মানসিক সমস্যায় অবিলম্বে একজন বিশেষজ্ঞের পরামর্শ নিন।",
@@ -218,7 +219,51 @@ const translations = {
     contactDetailsDesc: "পেমেন্ট সংক্রান্ত সমস্যা বা ই-বুক সংক্রান্ত যেকোনো জরুরি তথ্যের জন্য মেইল করতে পারো:",
     contactEmail: "support@monvalo.com",
     contactSocialsTitle: "আমাদের সোশ্যাল মিডিয়া",
-    contactResponseNote: "*আমরা প্রতিটি মেইল খুব যত্নসহকারে পড়ি এবং উত্তর দেওয়ার সর্বোচ্চ চেষ্টা করি।"
+    contactResponseNote: "*আমরা প্রতিটি মেইল খুব যত্নসহকারে পড়ি এবং উত্তর দেওয়ার সর্বোচ্চ চেষ্টা করি।",
+
+    // -------------------------------------------------------------
+    // INTERACTIVE TOOLS PAGE
+    // -------------------------------------------------------------
+    toolsTitle: "ইন্টারঅ্যাক্টিভ মন ভালো করার টুলস",
+    toolsSubtitle: "যদি এই মুহূর্তে তোমার খুব অস্থির লাগে বা ভয় কাজ করে, নিচের যেকোনো একটি টুল ব্যবহার করে নিজেকে শান্ত করো।",
+    
+    // Tool 1: Worry Balloon
+    toolWorryTitle: "🎈 দুশ্চিন্তা উড়িয়ে দাও (Worry Release Balloon)",
+    toolWorryDesc: "তোমার মনে যে অস্থিরতা বা ভয়ের চিন্তাটি ঘুরছে, সেটি নিচের মেঘের বাক্সে লেখো এবং বেলুনে ভরে আকাশে উড়িয়ে দাও।",
+    toolWorryPlaceholder: "আমি ভয় পাচ্ছি যে... (এখানে লেখো)",
+    toolWorryBtn: "উড়িয়ে দাও",
+    toolWorrySuccess: "তোমার দুশ্চিন্তাটি বেলুনে ভরে হারিয়ে গেছে। মন থেকে ঝেড়ে ফেলে গভীর একটি শ্বাস নাও। তুমি নিরাপদ আছো।",
+    
+    // Tool 2: Grounding
+    toolGroundTitle: "🧘‍♀️ ৫-৪-৩-২-১ গ্রাউন্ডিং এক্সারসাইজ",
+    toolGroundDesc: "যখন চারপাশের সবকিছু অবাস্তব মনে হয়, এই ইন্টারেক্টিভ গাইডটি তোমাকে পুনরায় বর্তমানে ফিরিয়ে আনবে।",
+    toolGroundStart: "গ্রাউন্ডিং শুরু করো",
+    toolGroundStep5: "👀 চারপাশে তাকাও। যেকোনো ৫টি জিনিস মন দিয়ে দেখো এবং মনে মনে তাদের নাম বলো।",
+    toolGroundStep4: "🧍 তোমার শরীরের ৪টি স্পর্শ অনুভব করো (যেমন: পায়ের নিচে শক্ত মেঝে, পরনের কাপড়ের স্পর্শ)।",
+    toolGroundStep3: "👂 কান পেতে শোনো। তোমার আশেপাশে ৩টি আলাদা শব্দ বা আওয়াজ চিহ্নিত করো।",
+    toolGroundStep2: "👃 ২টি জিনিসের গন্ধ অনুভব করো (যেমন: বইয়ের পাতা, মৃদু সুবাস বা তোমার গায়ের কাপড়)।",
+    toolGroundStep1: "👅 ১টি জিনিসের স্বাদ অনুভব করো (যেমন: মুখের ভেতর জলের স্পর্শ বা স্বাভাবিক স্বাদ)।",
+    toolGroundNext: "পরবর্তী ধাপ →",
+    toolGroundFinish: "অসাধারণ! তুমি বর্তমান মুহূর্তে নিজেকে ফিরিয়ে এনেছ। তুমি এখন শান্ত এবং নিরাপদ আছো।",
+
+    // Tool 3: Comfort Letters
+    toolComfortTitle: "💌 মুড সান্ত্বনা কার্ড (Comfort Letters)",
+    toolComfortDesc: "তুমি এই মুহূর্তে ঠিক কেমন অনুভব করছ? নিচের অপশনে ক্লিক করো এবং তোমার জন্য লেখা সান্ত্বনার চিঠিটি পড়ো।",
+    toolComfortBtnAnxious: "অ্যাংজাইটি (উদ্বেগ)",
+    toolComfortBtnPanic: "প্যানিক অ্যাটাক",
+    toolComfortBtnRestless: "অস্থিরতা লাগছে",
+    toolComfortBtnLonely: "খুব একা লাগছে",
+    toolComfortLetterAnxious: "<b>প্রিয় বন্ধু,</b><br>আমি জানি তোমার মনের ভেতর ঝড়ের মতো চিন্তা ঘুরপাক খাচ্ছে। তোমার বুকটা কাঁপছে, মনে হচ্ছে খারাপ কিছু ঘটবে। কিন্তু গভীরভাবে দম নাও। এই ভয়টি সাময়িক। অতীতেও তুমি এমন উদ্বেগের মধ্য দিয়ে গেছ এবং সফলভাবে পার করেছ। এবারও তুমি পারবে। নিজের ওপর আস্থা রাখো, তুমি নিরাপদ আছো।",
+    toolComfortLetterPanic: "<b>প্রিয় বন্ধু,</b><br>এখনই চোখ বন্ধ করো এবং লম্বা দম নাও। তোমার শরীর এখন লড়ো-অথবা-পালাও (Fight or Flight) মোডে আছে, স্নায়ুতে অতিরিক্ত অ্যাড্রেনালিন বইছে। এটি অত্যন্ত অস্বস্তিকর হলেও <b>সম্পূর্ণ নিরাপদ</b>। এটি তোমার হার্টবিট থামাবে না বা তোমাকে পাগল করবে না। ঠিক ১০ মিনিট শান্ত হয়ে বসো, এই তীব্র ঢেউটি কেটে যাবে। আমি তোমার পাশে আছি।",
+    toolComfortLetterRestless: "<b>প্রিয় বন্ধু,</b><br>অস্থিরতা লাগলে নিজেকে কোনো কাজে জোর কোরো না। একটু উঠে দাঁড়াও, মৃদু আলোতে যাও, সামান্য ঠাণ্ডা জল খাও। আজকের দিনটি না হয় শুধুই বিশ্রামের হোক। তোমার কোনো কাজ আজ নিখুঁত না হলেও চলবে। নিজেকে একটু ছাড় দাও, তুমি খুব ভালো করছ।",
+    toolComfortLetterLonely: "<b>প্রিয় বন্ধু,</b><br>তোমার হয়তো মনে হচ্ছে এই বিশাল পৃথিবীতে তোমার কষ্ট বোঝার মতো কেউ নেই। কিন্তু মনে রেখো, তুমি একদম একা নও। মনভালো ডট কমের আমরা সবাই এবং তোমার মতো আরও অনেকেই আজ এই ভয়ের সাথে লড়াই করছি। আমরা দূর থেকেই তোমাকে জড়িয়ে ধরছি এবং সাহস দিচ্ছি। তুমি আমাদের কাছে গুরুত্বপূর্ণ।",
+
+    // Tool 4: Audio Mixer
+    toolMixerTitle: "🌧️ রিলাক্সিং সাউন্ড মিক্সার (Ambient Mixer)",
+    toolMixerDesc: "কোনো ফাইল লোড করা ছাড়াই ব্রাউজারে তৈরি করুন প্রকৃতির শান্ত সুর। স্লাইডার টেনে মিক্স করে শুনুন মেডিটেশন সাউন্ড।",
+    toolMixerRain: "ঝুম বৃষ্টি",
+    toolMixerOcean: "সমুদ্রের ঢেউ",
+    toolMixerMeditate: "ধ্যানমগ্ন সুর"
   },
   en: {
     // Navigation
@@ -230,6 +275,7 @@ const translations = {
     navShop: "Bookshop",
     navAbout: "About Us",
     navContact: "Contact",
+    navTools: "Mind Tools",
     toggleLanguage: "বাংলা",
     footerText: "Let the mind heal, let the mind stay well. © 2026 monvalo.com",
     footerDisclaimer: "Disclaimer: We are not clinical medical professionals or doctors. In case of severe mental distress, please consult a specialist immediately.",
@@ -436,7 +482,51 @@ const translations = {
     contactDetailsDesc: "For queries regarding payments or e-books, feel free to write to us directly at:",
     contactEmail: "support@monvalo.com",
     contactSocialsTitle: "Connect on Socials",
-    contactResponseNote: "*We read every single message and try our best to reply with care."
+    contactResponseNote: "*We read every single message and try our best to reply with care.",
+
+    // -------------------------------------------------------------
+    // INTERACTIVE TOOLS PAGE
+    // -------------------------------------------------------------
+    toolsTitle: "Interactive Mindfulness Tools",
+    toolsSubtitle: "If you feel restless or panicked right now, use any of these interactive tools to ground yourself.",
+    
+    // Tool 1: Worry Balloon
+    toolWorryTitle: "🎈 Worry Release Balloon",
+    toolWorryDesc: "Type the anxious thought that is cluttering your mind, lock it in a balloon, and watch it float away into the clouds.",
+    toolWorryPlaceholder: "I am afraid that... (write here)",
+    toolWorryBtn: "Let It Go",
+    toolWorrySuccess: "Your worry has floated away. Let it go from your heart and take a deep breath. You are safe.",
+    
+    // Tool 2: Grounding
+    toolGroundTitle: "🧘‍♀️ 5-4-3-2-1 Grounding Game",
+    toolGroundDesc: "When the world starts feeling distant or unreal, this step-by-step interactive wizard brings you back to the present.",
+    toolGroundStart: "Start Grounding",
+    toolGroundStep5: "👀 Look around. Focus on 5 things in your environment and name them in your head.",
+    toolGroundStep4: "🧍 Feel 4 tactile sensations (e.g. the solid floor under your feet, the texture of your clothes).",
+    toolGroundStep3: "👂 Listen. Identify 3 distinct sounds happening around you.",
+    toolGroundStep2: "👃 Notice 2 scents (e.g. books, soap, or the natural scent of the air).",
+    toolGroundStep1: "👅 Focus on 1 taste (e.g. a sip of water or the natural state of your mouth).",
+    toolGroundNext: "Next Step →",
+    toolGroundFinish: "Wonderful! You have anchored yourself back in the present moment. You are safe, and you are here.",
+
+    // Tool 3: Comfort Letters
+    toolComfortTitle: "💌 Mood Comfort Cards",
+    toolComfortDesc: "How are you feeling right now? Click an emotion to flip the card and read a warm letter written for you.",
+    toolComfortBtnAnxious: "Feeling Anxious",
+    toolComfortBtnPanic: "Having a Panic Attack",
+    toolComfortBtnRestless: "Feeling Restless",
+    toolComfortBtnLonely: "Feeling Lonely",
+    toolComfortLetterAnxious: "<b>Dear Friend,</b><br>I know a storm is raging in your head right now. Your chest feels tight, and you worry something terrible is about to happen. But breathe deeply. This fear is a visitor, not a resident. You have survived every single anxious day before this. You are safe, and this will pass.",
+    toolComfortLetterPanic: "<b>Dear Friend,</b><br>Stop what you are doing and take a long, slow breath. Your body is in Fight-or-Flight mode, flooded with adrenaline. It feels terrifying, but it is <b>completely harmless</b>. It will not stop your heart or make you lose your mind. Wait 10 minutes, ride this wave, and it will settle. I am here with you.",
+    toolComfortLetterRestless: "<b>Dear Friend,</b><br>If you feel restless, do not force yourself to focus or be productive. Stand up, sip some cool water, and dim the lights. It is okay if you do not accomplish anything today. Give yourself permission to rest. You are doing enough.",
+    toolComfortLetterLonely: "<b>Dear Friend,</b><br>You might feel like you are completely alone in your struggle. But please know that you are not. The entire MonValo community, along with thousands of others, are walking this path together. We care about you, we understand your pain, and we are sending you warmth.",
+
+    // Tool 4: Audio Mixer
+    toolMixerTitle: "🌧️ Meditative Sound Mixer",
+    toolMixerDesc: "Synthesize soothing nature sounds directly in your browser without loading any audio files. Adjust sliders to mix.",
+    toolMixerRain: "Rainfall",
+    toolMixerOcean: "Ocean Waves",
+    toolMixerMeditate: "Meditative Drone"
   }
 };
 

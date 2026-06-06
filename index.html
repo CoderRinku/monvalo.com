@@ -50,6 +50,7 @@
           <li><a href="#/" class="active" data-i18n="navHome" id="link-home">হোম</a></li>
           <li><a href="#/conditions" data-i18n="navConditions" id="link-conditions">রোগের কথা</a></li>
           <li><a href="#/tips" data-i18n="navTips" id="link-tips">মুক্তির উপায়</a></li>
+          <li><a href="#/tools" data-i18n="navTools" id="link-tools">মন ভালো করার টুলস</a></li>
           <li><a href="#/blog" data-i18n="navBlog" id="link-blog">ব্লগ</a></li>
           <li><a href="#/shop" data-i18n="navShop" id="link-shop">বইঘর</a></li>
           <li><a href="#/about" data-i18n="navAbout" id="link-about">আমাদের কথা</a></li>
@@ -89,17 +90,17 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
       <span data-i18n="navConditions">রোগের কথা</span>
     </a>
+    <a href="#/tools" class="mobile-nav-item" id="m-link-tools">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+      <span data-i18n="navTools">টুলস</span>
+    </a>
     <a href="#/tips" class="mobile-nav-item" id="m-link-tips">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-      <span data-i18n="navTips">মুক্তির উপায়</span>
+      <span data-i18n="navTips">টিপস</span>
     </a>
     <a href="#/blog" class="mobile-nav-item" id="m-link-blog">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
       <span data-i18n="navBlog">ব্লগ</span>
-    </a>
-    <a href="#/shop" class="mobile-nav-item" id="m-link-shop">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-      <span data-i18n="navShop">বইঘর</span>
     </a>
   </nav>
 
@@ -544,6 +545,190 @@
           <p data-i18n="paymentNoteDesc">বিকাশ (bKash) / নগদ (Nagad) / রকেট বা কার্ডের মাধ্যমে পেমেন্ট করতে পারবেন। অর্ডার করার পর আপনার ইমেইলে পেমেন্ট লিংক এবং নির্দেশিকা পাঠানো হবে। পেমেন্ট সম্পূর্ণ হওয়ার পর ইমেইলেই ই-বুকটি (PDF) ডেলিভারি দেওয়া হবে।</p>
         </div>
       </div>
+    </section>
+
+    <!-- INTERACTIVE MIND TOOLS SECTION -->
+    <section id="tools" class="page-section">
+      <div class="section-header">
+        <h2 data-i18n="toolsTitle">ইন্টারঅ্যাক্টিভ মন ভালো করার টুলস</h2>
+        <p data-i18n="toolsSubtitle">যদি এই মুহূর্তে তোমার খুব অস্থির লাগে বা ভয় কাজ করে, নিচের যেকোনো একটি টুল ব্যবহার করে নিজেকে শান্ত করো।</p>
+      </div>
+
+      <!-- Worry Release Balloon Card -->
+      <div class="condition-section-block reveal" id="tool-worry-block" style="margin-bottom: 3.5rem;">
+        <h3 data-i18n="toolWorryTitle" style="font-size: 1.8rem; color: var(--color-primary); margin-bottom: 0.5rem; font-weight: 700;">🎈 দুশ্চিন্তা উড়িয়ে দাও (Worry Release Balloon)</h3>
+        <p data-i18n="toolWorryDesc" style="color: var(--text-muted); margin-bottom: 2rem;"></p>
+        
+        <div class="worry-balloon-container" style="max-width: 600px; margin: 0 auto; text-align: center; position: relative;">
+          <!-- Sky Area for Balloon animation -->
+          <div class="balloon-sky" id="worry-sky" style="height: 200px; position: relative; overflow: hidden; border-radius: 16px; background: linear-gradient(to bottom, #FFE8D6 0%, #FFF8F0 100%); border: 1px solid var(--border-color); margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center;">
+            <div class="sky-cloud" style="position: absolute; top: 15px; left: 10%; opacity: 0.2; font-size: 1.5rem;">☁️</div>
+            <div class="sky-cloud" style="position: absolute; top: 35px; right: 15%; opacity: 0.3; font-size: 1.5rem;">☁️</div>
+            <!-- Animated Balloon itself -->
+            <div class="balloon-element" id="worry-balloon" style="display: none; width: 80px; height: 95px; background-color: var(--color-primary); border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; position: absolute; bottom: -120px; box-shadow: 0 8px 16px var(--glow-color); align-items: center; justify-content: center;">
+              <div class="balloon-string" style="width: 2px; height: 35px; background: var(--text-muted); position: absolute; bottom: -35px; left: 50%; transform: translateX(-50%);"></div>
+              <div class="balloon-knot" style="width: 8px; height: 8px; background: var(--color-primary); position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%) rotate(45deg);"></div>
+              <span class="balloon-text" id="worry-balloon-text" style="font-size: 0.75rem; color: #FFFFFF; font-weight: 700; width: 100%; text-align: center; display: block; padding: 0 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; position: relative; z-index: 5;"></span>
+            </div>
+            <div id="sky-placeholder-text" style="font-weight: 600; color: var(--color-secondary); font-style: italic;">Worry Release Sky</div>
+          </div>
+          
+          <form id="worry-form" style="display: flex; gap: 1rem;">
+            <input type="text" id="worry-input" class="form-input" data-i18n-placeholder="toolWorryPlaceholder" placeholder="আমি ভয় পাচ্ছি যে..." required style="flex: 1; border-radius: 20px;">
+            <button type="submit" class="btn-primary" id="btn-worry-submit" style="padding: 0 2rem; border-radius: 20px; white-space: nowrap;">
+              <span data-i18n="toolWorryBtn">উড়িয়ে দাও</span>
+            </button>
+          </form>
+          <p id="worry-success-msg" class="reveal" style="display: none; color: var(--color-success); font-weight: 700; margin-top: 1.5rem;" data-i18n="toolWorrySuccess"></p>
+        </div>
+      </div>
+
+      <!-- 5-4-3-2-1 Grounding Interactive Session -->
+      <div class="condition-section-block reveal" id="tool-grounding-block" style="margin-bottom: 3.5rem;">
+        <h3 data-i18n="toolGroundTitle" style="font-size: 1.8rem; color: var(--color-primary); margin-bottom: 0.5rem; font-weight: 700;">🧘‍♀️ ৫-৪-৩-২-১ গ্রাউন্ডিং এক্সারসাইজ</h3>
+        <p data-i18n="toolGroundDesc" style="color: var(--text-muted); margin-bottom: 2rem;"></p>
+        
+        <div class="grounding-wizard-container" style="max-width: 650px; margin: 0 auto; text-align: center; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 24px; padding: 3rem 2rem; min-height: 250px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+          <!-- Wizard screens -->
+          <div class="wizard-screen active" id="grounding-screen-start">
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1.5" style="margin-bottom: 1.5rem;">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <button class="btn-primary" id="btn-grounding-start" data-i18n="toolGroundStart">গ্রাউন্ডিং শুরু করো</button>
+          </div>
+          
+          <!-- Steps will be rendered dynamically or toggled via JS -->
+          <div class="wizard-screen" id="grounding-screen-step5" style="display: none;">
+            <div class="step-badge" style="background: var(--color-primary); color: #FFF; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem; margin-left: auto; margin-right: auto;">5</div>
+            <p data-i18n="toolGroundStep5" style="font-size: 1.25rem; font-weight: 600; line-height: 1.6; margin-bottom: 2rem;"></p>
+            <button class="btn-primary btn-grounding-next" data-next="step4" data-i18n="toolGroundNext">পরবর্তী ধাপ →</button>
+          </div>
+          
+          <div class="wizard-screen" id="grounding-screen-step4" style="display: none;">
+            <div class="step-badge" style="background: var(--color-primary); color: #FFF; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem; margin-left: auto; margin-right: auto;">4</div>
+            <p data-i18n="toolGroundStep4" style="font-size: 1.25rem; font-weight: 600; line-height: 1.6; margin-bottom: 2rem;"></p>
+            <button class="btn-primary btn-grounding-next" data-next="step3" data-i18n="toolGroundNext">পরবর্তী ধাপ →</button>
+          </div>
+          
+          <div class="wizard-screen" id="grounding-screen-step3" style="display: none;">
+            <div class="step-badge" style="background: var(--color-primary); color: #FFF; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem; margin-left: auto; margin-right: auto;">3</div>
+            <p data-i18n="toolGroundStep3" style="font-size: 1.25rem; font-weight: 600; line-height: 1.6; margin-bottom: 2rem;"></p>
+            <button class="btn-primary btn-grounding-next" data-next="step2" data-i18n="toolGroundNext">পরবর্তী ধাপ →</button>
+          </div>
+          
+          <div class="wizard-screen" id="grounding-screen-step2" style="display: none;">
+            <div class="step-badge" style="background: var(--color-primary); color: #FFF; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem; margin-left: auto; margin-right: auto;">2</div>
+            <p data-i18n="toolGroundStep2" style="font-size: 1.25rem; font-weight: 600; line-height: 1.6; margin-bottom: 2rem;"></p>
+            <button class="btn-primary btn-grounding-next" data-next="step1" data-i18n="toolGroundNext">পরবর্তী ধাপ →</button>
+          </div>
+          
+          <div class="wizard-screen" id="grounding-screen-step1" style="display: none;">
+            <div class="step-badge" style="background: var(--color-primary); color: #FFF; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem; margin-left: auto; margin-right: auto;">1</div>
+            <p data-i18n="toolGroundStep1" style="font-size: 1.25rem; font-weight: 600; line-height: 1.6; margin-bottom: 2rem;"></p>
+            <button class="btn-primary btn-grounding-next" data-next="finish" data-i18n="toolGroundNext">পরবর্তী ধাপ →</button>
+          </div>
+          
+          <div class="wizard-screen" id="grounding-screen-finish" style="display: none;">
+            <div class="icon-success" style="width: 70px; height: 70px; border-radius: 50%; background: rgba(131, 197, 190, 0.2); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; margin-left: auto; margin-right: auto;">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--color-success)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <p data-i18n="toolGroundFinish" style="font-size: 1.3rem; font-weight: 700; color: var(--text-main); margin-bottom: 2rem;"></p>
+            <button class="btn-secondary" id="btn-grounding-restart" data-i18n="toolGroundStart">গ্রাউন্ডিং শুরু করো</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mood Comfort Cards -->
+      <div class="condition-section-block reveal" id="tool-comfort-block" style="margin-bottom: 3.5rem;">
+        <h3 data-i18n="toolComfortTitle" style="font-size: 1.8rem; color: var(--color-primary); margin-bottom: 0.5rem; font-weight: 700;">💌 মুড সান্ত্বনা কার্ড (Comfort Letters)</h3>
+        <p data-i18n="toolComfortDesc" style="color: var(--text-muted); margin-bottom: 2.5rem;"></p>
+        
+        <div class="comfort-selector-row" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem;">
+          <button class="btn-secondary btn-comfort-mood active" data-mood="anxious" data-i18n="toolComfortBtnAnxious">অ্যাংজাইটি (উদ্বেগ)</button>
+          <button class="btn-secondary btn-comfort-mood" data-mood="panic" data-i18n="toolComfortBtnPanic">প্যানিক অ্যাটাক</button>
+          <button class="btn-secondary btn-comfort-mood" data-mood="restless" data-i18n="toolComfortBtnRestless">অস্থিরতা লাগছে</button>
+          <button class="btn-secondary btn-comfort-mood" data-mood="lonely" data-i18n="toolComfortBtnLonely">খুব একা লাগছে</button>
+        </div>
+        
+        <!-- The Letter Card with 3D Flip look -->
+        <div class="comfort-card-flip-container" style="perspective: 1000px; max-width: 600px; margin: 0 auto; height: 280px;">
+          <div class="comfort-card-inner" id="comfort-card-inner-box" style="width: 100%; height: 100%; transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; cursor: pointer; position: relative;">
+            
+            <!-- Front of Card: Styled Envelope -->
+            <div class="comfort-card-front" style="width: 100%; height: 100%; backface-visibility: hidden; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-secondary); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2rem; position: absolute; top: 0; left: 0; box-shadow: var(--shadow-md);">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1.5" style="margin-bottom: 1rem;">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <span style="font-weight: 700; color: var(--color-primary); font-size: 1.1rem; letter-spacing: 0.5px; text-align: center;">Click to Open Your Comfort Letter</span>
+              <span style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; font-style: italic; text-align: center;">চিঠিটি খোলো</span>
+            </div>
+            
+            <!-- Back of Card: The actual comforting letter text -->
+            <div class="comfort-card-back" style="width: 100%; height: 100%; backface-visibility: hidden; transform: rotateY(180deg); border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-card); display: flex; flex-direction: column; justify-content: center; padding: 2.5rem 2rem; position: absolute; top: 0; left: 0; box-shadow: var(--shadow-lg); overflow-y: auto; text-align: left;">
+              <p id="comfort-letter-text" style="font-size: 1.08rem; line-height: 1.7; color: var(--text-main); font-style: italic;" data-i18n="toolComfortLetterAnxious">Letter text goes here...</p>
+              <span style="display: block; text-align: right; margin-top: 1.5rem; font-weight: 700; color: var(--color-primary); font-size: 0.95rem;">— মনভালো.কম</span>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- Synthesized Ambient Sound Mixer -->
+      <div class="condition-section-block reveal" id="tool-mixer-block" style="margin-bottom: 2rem;">
+        <h3 data-i18n="toolMixerTitle" style="font-size: 1.8rem; color: var(--color-primary); margin-bottom: 0.5rem; font-weight: 700;">🌧️ রিলাক্সিং সাউন্ড মিক্সার (Ambient Mixer)</h3>
+        <p data-i18n="toolMixerDesc" style="color: var(--text-muted); margin-bottom: 2.5rem;"></p>
+        
+        <div class="sound-mixer-box" style="max-width: 550px; margin: 0 auto; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 20px; padding: 2.5rem 2rem; box-shadow: var(--shadow-sm);">
+          
+          <!-- Sound Control: Rain -->
+          <div class="mixer-row" style="margin-bottom: 1.8rem;">
+            <div class="mixer-info" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
+              <span style="font-weight: 700; display: flex; align-items: center; gap: 0.5rem; font-size: 1rem;">
+                <span>🌧️</span>
+                <span data-i18n="toolMixerRain">ঝুম বৃষ্টি</span>
+              </span>
+              <span class="mixer-vol-val" id="vol-rain-val" style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">0%</span>
+            </div>
+            <input type="range" id="slider-rain" min="0" max="100" value="0" class="mixer-slider" style="width: 100%; height: 6px; border-radius: 3px; background: var(--border-color); outline: none; transition: background 0.3s; accent-color: var(--color-primary); cursor: pointer;">
+          </div>
+          
+          <!-- Sound Control: Ocean -->
+          <div class="mixer-row" style="margin-bottom: 1.8rem;">
+            <div class="mixer-info" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
+              <span style="font-weight: 700; display: flex; align-items: center; gap: 0.5rem; font-size: 1rem;">
+                <span>🌊</span>
+                <span data-i18n="toolMixerOcean">সমুদ্রের ঢেউ</span>
+              </span>
+              <span class="mixer-vol-val" id="vol-ocean-val" style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">0%</span>
+            </div>
+            <input type="range" id="slider-ocean" min="0" max="100" value="0" class="mixer-slider" style="width: 100%; height: 6px; border-radius: 3px; background: var(--border-color); outline: none; transition: background 0.3s; accent-color: var(--color-primary); cursor: pointer;">
+          </div>
+          
+          <!-- Sound Control: Meditate -->
+          <div class="mixer-row" style="margin-bottom: 2rem;">
+            <div class="mixer-info" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
+              <span style="font-weight: 700; display: flex; align-items: center; gap: 0.5rem; font-size: 1rem;">
+                <span>🧘</span>
+                <span data-i18n="toolMixerMeditate">ধ্যানমগ্ন সুর</span>
+              </span>
+              <span class="mixer-vol-val" id="vol-meditate-val" style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">0%</span>
+            </div>
+            <input type="range" id="slider-meditate" min="0" max="100" value="0" class="mixer-slider" style="width: 100%; height: 6px; border-radius: 3px; background: var(--border-color); outline: none; transition: background 0.3s; accent-color: var(--color-primary); cursor: pointer;">
+          </div>
+          
+          <!-- Master Switch -->
+          <div style="text-align: center;">
+            <button class="btn-primary" id="btn-mixer-toggle" style="border-radius: 30px; font-weight: 700; padding: 0.75rem 2rem; display: inline-flex; align-items: center; gap: 0.5rem; border: none; cursor: pointer;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="mixer-play-icon"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              <span id="mixer-btn-text">Play Mixer</span>
+            </button>
+          </div>
+          
+        </div>
+      </div>
+      
     </section>
 
     <!-- 6. ABOUT US SECTION -->
