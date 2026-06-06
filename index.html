@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>monvalo.com — প্যানিক ও উদ্বেগ কাটিয়ে ওঠার সহযাত্রী</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="মনভালো.কম — প্যানিক অ্যাটাক, উদ্বেগ, এবং ভয়কে জয় করার একটি দ্বিভাষিক মানসিক স্বাস্থ্য প্ল্যাটফর্ম। এখানে রয়েছে গ্রাউন্ডিং টেকনিক, শ্বাস-প্রশ্বাসের ব্যায়াম ও ই-বুক।">
+  <meta name="keywords" content="Panic Attack, Anxiety Disorder, mental health Bangladesh, প্যানিক অ্যাটাক, উদ্বেগ, মানসিক স্বাস্থ্য, কান্না পেতে রই, মনের বন্ধু, শ্বাস নেওয়ার ব্যায়াম">
+  <meta name="author" content="monvalo.com">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Social Media Metas -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="monvalo.com — You Are Not Alone">
+  <meta property="og:description" content="A bilingual mental health platform focused on Panic, Anxiety, and recovery guides. You are not alone.">
+  <meta property="og:url" content="https://monvalo.com">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Custom Cursor Elements -->
+  <div class="custom-cursor" id="ui-custom-cursor-outer"></div>
+  <div class="custom-cursor-inner" id="ui-custom-cursor-inner"></div>
+
+  <!-- Background Bokeh Blobs -->
+  <div class="bokeh-container">
+    <div class="bokeh-blob"></div>
+    <div class="bokeh-blob"></div>
+    <div class="bokeh-blob"></div>
+  </div>
+
+  <!-- ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== -->
+  <header id="main-header">
+    <div class="nav-container">
+      <a href="#/" class="logo" id="nav-brand-logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+        </svg>
+        <span data-i18n="brandName">monvalo</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links" id="desktop-menu">
+          <li><a href="#/" class="active" data-i18n="navHome" id="link-home">হোম</a></li>
+          <li><a href="#/conditions" data-i18n="navConditions" id="link-conditions">রোগের কথা</a></li>
+          <li><a href="#/tips" data-i18n="navTips" id="link-tips">মুক্তির উপায়</a></li>
+          <li><a href="#/blog" data-i18n="navBlog" id="link-blog">ব্লগ</a></li>
+          <li><a href="#/shop" data-i18n="navShop" id="link-shop">বইঘর</a></li>
+          <li><a href="#/about" data-i18n="navAbout" id="link-about">আমাদের কথা</a></li>
+          <li><a href="#/contact" data-i18n="navContact" id="link-contact">যোগাযোগ</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-controls">
+        <!-- Language Switcher -->
+        <button class="btn-toggle btn-toggle-lang" id="btn-language-toggle" aria-label="Toggle Language">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span>EN</span>
+        </button>
+
+        <!-- Theme Switcher -->
+        <button class="btn-toggle btn-toggle-theme" id="btn-theme-toggle" aria-label="Toggle Theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <span data-i18n="themeDark">Dark</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="mobile-nav-bar" id="mobile-bottom-nav">
+    <a href="#/" class="mobile-nav-item active" id="m-link-home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+      <span data-i18n="navHome">হোম</span>
+    </a>
+    <a href="#/conditions" class="mobile-nav-item" id="m-link-conditions">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+      <span data-i18n="navConditions">রোগের কথা</span>
+    </a>
+    <a href="#/tips" class="mobile-nav-item" id="m-link-tips">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+      <span data-i18n="navTips">মুক্তির উপায়</span>
+    </a>
+    <a href="#/blog" class="mobile-nav-item" id="m-link-blog">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+      <span data-i18n="navBlog">ব্লগ</span>
+    </a>
+    <a href="#/shop" class="mobile-nav-item" id="m-link-shop">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+      <span data-i18n="navShop">বইঘর</span>
+    </a>
+  </nav>
+
+  <!-- ==========================================================================
+       MAIN CONTENT AREAS
+       ========================================================================== -->
+  <main id="app-main-content">
+
+    <!-- 1. HOMEPAGE SECTION -->
+    <section id="home" class="page-section active">
+      <div class="hero-wrapper">
+        <div class="hero-inner">
+          <h1 data-i18n="heroHeading" id="hero-main-title">তুমি একা নও।</h1>
+          <p data-i18n="heroSubheading" id="hero-main-subtitle">প্যানিক অ্যাটাক, উদ্বেগ আর মনের ভেতরের জমে থাকা ভয়গুলোর মুখোমুখি হতে আমরা আছি তোমার পাশে। এটি কোনো স্থায়ী অসুখ নয়, এখান থেকে মুক্তি সম্ভব।</p>
+          <div class="hero-ctas">
+            <a href="#/conditions" class="btn-primary" id="btn-hero-conditions">
+              <span data-i18n="heroCtaConditions">আমার সমস্যা জানো</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <a href="#/blog" class="btn-secondary" id="btn-hero-blog">
+              <span data-i18n="heroCtaBlog">Blog পড়ো</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Breathing Widget Section -->
+      <div class="breathing-section reveal" id="home-breathing-widget">
+        <h2 data-i18n="breatheTitle">এসো একটু শ্বাস নিই</h2>
+        <p data-i18n="breatheSubtitle" style="color: var(--text-muted); max-width: 600px; margin: 0 auto 2.5rem;">যদি এই মুহূর্তে তোমার বুক ধড়ফড় করে বা খুব বেশি ভয় লাগে, তাহলে নিচের বৃত্তটির সাথে মিলিয়ে একটু শ্বাস নাও। এটি তোমাকে শান্ত হতে সাহায্য করবে।</p>
+        
+        <div class="breathing-widget-container">
+          <div class="breathing-ring-wrapper">
+            <div class="breathing-circle-outer" id="breathe-circle-element">
+              <div class="breathing-circle-inner"></div>
+              <span class="breathing-status-text" id="breathe-status-display" data-i18n="breatheStateInhale">শ্বাস নাও...</span>
+            </div>
+          </div>
+          <div class="breathing-timer" id="breathing-box-timer">Box Breathing Cycle • 4s - 4s - 4s - 4s</div>
+        </div>
+      </div>
+
+      <!-- Feature Cards Grid -->
+      <div class="reveal" style="padding: 4rem 0;" id="home-features">
+        <div class="section-header">
+          <h2 data-i18n="featureTitle">আমাদের ফোকাস এরিয়া</h2>
+          <p data-i18n="featureSubtitle">যে মানসিক সমস্যাগুলো নিয়ে সচরাচর কেউ কথা বলে না, সেগুলোকে সহজে বোঝা ও কাটিয়ে ওঠার রাস্তা খুঁজে পাওয়া।</p>
+        </div>
+        <div class="cards-grid">
+          <!-- Card 1 -->
+          <div class="feature-card clickable" onclick="window.location.hash='#/conditions'">
+            <div class="icon-wrapper">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <h3 data-i18n="featPanicTitle">প্যানিক ডিসঅর্ডার</h3>
+            <p data-i18n="featPanicDesc">হঠাৎ করে বুক ধড়ফড়ানি, মনে হয় দম বন্ধ হয়ে যাচ্ছে বা এখনই কোনো বড় দুর্ঘটনা ঘটবে। এই তীব্র ভয়ের নামই প্যানিক।</p>
+            <span class="card-link">
+              <span data-i18n="learnMore">বিস্তারিত জানো</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </span>
+          </div>
+          <!-- Card 2 -->
+          <div class="feature-card clickable" onclick="window.location.hash='#/conditions'">
+            <div class="icon-wrapper">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            </div>
+            <h3 data-i18n="featAnxietyTitle">অ্যাংজাইটি (উদ্বেগ)</h3>
+            <p data-i18n="featAnxietyDesc">ভবিষ্যত নিয়ে সারাক্ষণ একটা চাপা ভয়, মন খারাপ লাগা বা খারাপ কিছু ঘটার আশঙ্কা বুকে চেপে রাখা।</p>
+            <span class="card-link">
+              <span data-i18n="learnMore">বিস্তারিত জানো</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </span>
+          </div>
+          <!-- Card 3 -->
+          <div class="feature-card clickable" onclick="window.location.hash='#/conditions'">
+            <div class="icon-wrapper">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+            </div>
+            <h3 data-i18n="featAttacksTitle">হঠাৎ প্যানিক অ্যাটাক</h3>
+            <p data-i18n="featAttacksDesc">কোনো আপাত কারণ ছাড়াই হুট করে নেমে আসা প্রচণ্ড আতঙ্কের মুহূর্ত, যা শরীর ও মনকে অসাড় করে দেয়।</p>
+            <span class="card-link">
+              <span data-i18n="learnMore">বিস্তারিত জানো</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial Strip -->
+      <div class="testimonial-section reveal" id="home-testimonials">
+        <div class="section-header" style="margin-bottom: 2.5rem;">
+          <h2 data-i18n="testimonialTitle">যারা আজ ভালো আছেন...</h2>
+        </div>
+        <div class="testimonial-strip">
+          <div class="testimonial-item">
+            <p data-i18n="test1">“মনে হতো আমি বুঝি হার্ট অ্যাটাক করছি, এখনই মরে যাবো। মনভালোর গাইডগুলো আমাকে শিখিয়েছে যে এটা কেবলই একটা সাময়িক অনুভূতি। আমি এখন সম্পূর্ণ মুক্ত।”</p>
+            <span>— বেনামী, ঢাকা</span>
+          </div>
+          <div class="testimonial-item">
+            <p data-i18n="test2">“রাতে ঘুমাতে পারতাম না অ্যাংজাইটির কারণে। ৫-৪-৩-২-১ টেকনিক আর শ্বাস নেওয়ার নিয়মগুলো আমার রাতের শান্তি ফিরিয়ে দিয়েছে।”</p>
+            <span>— বেনামী, সিলেট</span>
+          </div>
+          <div class="testimonial-item">
+            <p data-i18n="test3">“বাংলাদেশে মানসিক স্বাস্থ্য নিয়ে কথা বলা খুব কঠিন। কিন্তু এখানে এসে মনে হলো, কেউ একজন আমার না বলা কষ্টগুলো হুবহু বুঝতে পারছে।”</p>
+            <span>— বেনামী, চট্টগ্রাম</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shop CTA Banner -->
+      <div class="shop-cta-banner reveal" id="home-shop-cta">
+        <h2 data-i18n="ctaShopTitle">নিজের যত্নে আরেকটু গভীরে যেতে চাও?</h2>
+        <p data-i18n="ctaShopDesc">আমরা তৈরি করেছি কিছু সহজ ও কার্যকারী ই-বুক এবং ওয়ার্কবুক, যা তোমাকে প্রতিদিনের উদ্বেগ আর প্যানিক নিয়ন্ত্রণে সরাসরি সাহায্য করবে।</p>
+        <a href="#/shop" class="btn-primary" id="btn-home-shop-cta">
+          <span data-i18n="ctaShopBtn">আমাদের বইঘর দেখো</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- 2. CONDITIONS SECTION -->
+    <section id="conditions" class="page-section">
+      <div class="section-header">
+        <h2 data-i18n="condMainTitle">মনের কঠিন সময়গুলোকে জানা</h2>
+        <p data-i18n="condMainSubtitle">লক্ষণগুলোকে কোনো জটিল মেডিকেল টার্ম ছাড়াই নিজের ভাষায় বোঝা। মিলিয়ে দেখো, তুমিও কি এমন কিছু অনুভব করছো?</p>
+      </div>
+
+      <!-- Condition 1 -->
+      <div class="condition-section-block reveal" id="cond-block-panic">
+        <div class="condition-header-group">
+          <div class="cond-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
+          </div>
+          <div>
+            <h2 data-i18n="cond1Title">১. প্যানিক ডিসঅর্ডার (Panic Disorder)</h2>
+            <span class="subtitle-question" data-i18n="cond1Subtitle">“হঠাৎ বুক ধড়ফড় করে? মনে হয় এখনই বুঝি মরে যাচ্ছ?”</span>
+          </div>
+        </div>
+        <div class="condition-body-content">
+          <p data-i18n="cond1Desc">প্যানিক ডিসঅর্ডার হলো এমন একটি অবস্থা যেখানে একজন মানুষ বারবার, আকস্মিকভাবে এবং কোনো নির্দিষ্ট কারণ ছাড়াই প্রচণ্ড ভয়ে আক্রান্ত হন। একেই প্যানিক অ্যাটাক বলে। অনেকেই এটাকে হার্ট অ্যাটাক বা স্ট্রোক মনে করে হাসপাতালে ছোটেন, কিন্তু পরীক্ষা-নিরীক্ষায় সব নরমাল আসে। এটি কিন্তু কোনো শারীরিক রোগ নয়, এটি মনের একটি তীব্র বিপদের সংকেত মাত্র।</p>
+          <div class="condition-grid">
+            <div class="symptom-list-box">
+              <h3 data-i18n="cond1SymptomsTitle">সাধারণ লক্ষণসমূহ:</h3>
+              <ul>
+                <li data-i18n="cond1Sym1">💓 আকস্মিক তীব্র বুক ধড়ফড় করা এবং হার্টবিট বেড়ে যাওয়া</li>
+                <li data-i18n="cond1Sym2">🫁 নিঃশ্বাস নিতে কষ্ট হওয়া বা দম আটকে আসার অনুভূতি</li>
+                <li data-i18n="cond1Sym3">🥶 শরীর হঠাৎ অতিরিক্ত ঠান্ডা বা গরম হয়ে যাওয়া, ঘেমে যাওয়া</li>
+                <li data-i18n="cond1Sym4">🌪️ মাথা ঘোরা, শরীর কাঁপা এবং মনে হওয়া যে আমি নিজের ওপর নিয়ন্ত্রণ হারাচ্ছি বা মারা যাচ্ছি</li>
+              </ul>
+            </div>
+            <div class="quote-highlight-box">
+              <p data-i18n="cond1Quote">“অনেকেই বলেন যে, তারা যখন বাসার বাইরে যান বা জনাকীর্ণ স্থানে থাকেন, তখন তাদের মনে হয় এই বুঝি একটা অ্যাটাক হবে। এই অগ্রিম ভয়টাই তাদের জীবনকে সংকুচিত করে ফেলে।”</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Condition 2 -->
+      <div class="condition-section-block reveal" id="cond-block-anxiety">
+        <div class="condition-header-group">
+          <div class="cond-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+          </div>
+          <div>
+            <h2 data-i18n="cond2Title">২. জেনারেল অ্যাংজাইটি ডিসঅর্ডার (Anxiety Disorder)</h2>
+            <span class="subtitle-question" data-i18n="cond2Subtitle">“সারাক্ষণ মনের ভেতর একটা অদ্ভুত ভয় ভয় ভাব লেগে থাকে?”</span>
+          </div>
+        </div>
+        <div class="condition-body-content">
+          <p data-i18n="cond2Desc">অ্যাংজাইটি বা সাধারণ উদ্বেগ হলো প্রতিদিনের ছোটখাটো বিষয় নিয়ে অতিরিক্ত চিন্তা বা ভয়। কোনো কারণ ছাড়াই মনে হতে পারে যে আজ বোধহয় খারাপ কিছু ঘটবে, কারোর অ্যাক্সিডেন্ট হবে বা চাকরি চলে যাবে। এই অবিরত চিন্তা শরীরে সবসময় একটা হালকা উত্তেজনা বা ক্লান্তি তৈরি করে রাখি, যার ফলে মন শান্ত হতে পারে না।</p>
+          <div class="condition-grid">
+            <div class="symptom-list-box">
+              <h3 data-i18n="cond2SymptomsTitle">সাধারণ লক্ষণসমূহ:</h3>
+              <ul>
+                <li data-i18n="cond2Sym1">🧠 সবসময় অতিরিক্ত দুশ্চিন্তা এবং মাথা খালি করতে না পারা</li>
+                <li data-i18n="cond2Sym2">😴 ঘুমের সমস্যা, রাতে সহজে ঘুম না আসা বা ঘুম ভেঙে যাওয়া</li>
+                <li data-i18n="cond2Sym3">🧍 কাঁধ, ঘাড় বা পিঠের পেশী শক্ত হয়ে থাকা এবং ক্লান্তি বোধ</li>
+                <li data-i18n="cond2Sym4">🥺 খিটখিটে মেজাজ, মনোযোগ দিতে সমস্যা এবং অস্থিরতা</li>
+              </ul>
+            </div>
+            <div class="quote-highlight-box">
+              <p data-i18n="cond2Quote">“অনেকেই আমাদের লিখেছেন, ‘আমি জানি আমার চিন্তার কোনো যৌক্তিক কারণ নেই, তবুও আমি নিজেকে থামাতে পারি না। মনে হয় আমার মস্তিষ্ক সবসময় বিপদের জন্য প্রস্তুত হয়ে বসে আছে।’”</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Condition 3 -->
+      <div class="condition-section-block reveal" id="cond-block-panicattack">
+        <div class="condition-header-group">
+          <div class="cond-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+          </div>
+          <div>
+            <h2 data-i18n="cond3Title">৩. হঠাৎ প্যানিক অ্যাটাক (Unexpected Panic Attacks)</h2>
+            <span class="subtitle-question" data-i18n="cond3Subtitle">“কিছু না ঘটতেই হঠাৎ করে একটা তীব্র ভয়ের ঢেউ আছড়ে পড়া”</span>
+          </div>
+        </div>
+        <div class="condition-body-content">
+          <p data-i18n="cond3Desc">কোনো ধরনের পূর্বাবাস বা ট্রিগার ছাড়াই যখন হঠাৎ করে কয়েক মিনিটের জন্য তীব্র শারীরিক ও মানসিক ভয়ের উৎপত্তি হয়, তাকে আনএক্সপেক্টেড প্যানিক অ্যাটাক বলে। এটি সাধারণত ১০ মিনিটের মধ্যে চূড়ায় পৌঁছায় এবং আস্তে আস্তে শান্ত হয়ে যায়। এটি অত্যন্ত কষ্টদায়ক হলেও শরীরের কোনো স্থায়ী ক্ষতি করে না।</p>
+          <div class="condition-grid">
+            <div class="symptom-list-box">
+              <h3 data-i18n="cond3SymptomsTitle">সাধারণ লক্ষণসমূহ:</h3>
+              <ul>
+                <li data-i18n="cond3Sym1">⚡ হঠাৎ করে বুকে ব্যথা বা চাপ অনুভব করা</li>
+                <li data-i18n="cond3Sym2">🤢 পেট গুলিয়ে আসা বা বমি বমি ভাব লাগা</li>
+                <li data-i18n="cond3Sym3">🤯 চারপাশের সবকিছুকে অবাস্তব মনে হওয়া (মনে হওয়া আমি স্বপ্ন দেখছি বা নিজেকে আলাদা ভাবা)</li>
+                <li data-i18n="cond3Sym4">👋 হাত-পা অবশ বা অবশ ভাব হওয়া এবং এক ধরনের অসাড়তা</li>
+              </ul>
+            </div>
+            <div class="quote-highlight-box">
+              <p data-i18n="cond3Quote">“প্যানিক অ্যাটাকের সময় আমাদের শরীর 'লড়ো অথবা পালাও' (Fight or Flight) মোডে চলে যায়। মস্তিষ্ক ভুল করে ভাবে যে সামনে একটি বাঘ দাঁড়িয়ে আছে, অথচ বাস্তবে হয়তো তুমি তোমার পড়ার টেবিলেই বসে আছো।”</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Condition 4 -->
+      <div class="condition-section-block reveal" id="cond-block-futurefear">
+        <div class="condition-header-group">
+          <div class="cond-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          </div>
+          <div>
+            <h2 data-i18n="cond4Title">৪. ভবিষ্যতের ভয় (Anticipatory Anxiety)</h2>
+            <span class="subtitle-question" data-i18n="cond4Subtitle">“পরের বার আবার যদি প্যানিক অ্যাটাক হয়? এই ভয়টার শেষ কোথায়?”</span>
+          </div>
+        </div>
+        <div class="condition-body-content">
+          <p data-i18n="cond4Desc">একবার প্যানিক অ্যাটাকের স্বাদ পাওয়ার পর, মানুষের মনে সবচেয়ে বড় যে ভয়টি তৈরি হয় তা হলো—'যদি এটা আবার ঘটে?' একে বলা হয় অ্যান্ডিসিপেটরি অ্যাংজাইটি বা অগ্রিম ভয়। এই ভয়ের কারণে মানুষ একা বাইরে যাওয়া, শপিং মলে যাওয়া, বা লিফটে ওঠা বন্ধ করে দেয়। মূলত সে পরিস্থিতিকে নয়, বরং ওই প্যানিকের তীব্র অনুভূতিটাকে ভয় পায়।</p>
+          <div class="condition-grid">
+            <div class="symptom-list-box">
+              <h3 data-i18n="cond4SymptomsTitle">সাধারণ লক্ষণসমূহ:</h3>
+              <ul>
+                <li data-i18n="cond4Sym1">🚶 একা বাইরে যেতে বা এমন জায়গায় যেতে ভয় পাওয়া যেখান থেকে দ্রুত পালানো কঠিন</li>
+                <li data-i18n="cond4Sym2">🏥 সবসময় ডাক্তার বা হাসপাতালের কাছাকাছি থাকার চেষ্টা করা</li>
+                <li data-i18n="cond4Sym3">🤒 সামান্য শারীরিক পরিবর্তন (যেমন একটু গরম লাগা বা সামান্য বুক ধড়ফড়) হলেই প্যানিকড হয়ে যাওয়া</li>
+                <li data-i18n="cond4Sym4">🗓️ ভবিষ্যৎ কোনো প্রোগ্রাম বা কাজের কথা ভেবে কয়েকদিন আগে থেকেই দুশ্চিন্তায় ভোগা</li>
+              </ul>
+            </div>
+            <div class="quote-highlight-box">
+              <p data-i18n="cond4Quote">“ভয়কে ভয় পাওয়াই হলো এই চক্রের মূল শক্তি। যখন আমরা বুঝবো যে প্যানিক হওয়া মানেই মারা যাওয়া নয়, তখন এই ভয়ের জাল ছিঁড়ে ফেলা অনেক সহজ হয়ে যায়।”</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Checkbox List -->
+      <div class="checklist-section-box reveal" id="conditions-selfcheck">
+        <h2 data-i18n="selfCheckTitle">তুমি কি এটা ফিল করছ? (সফট সেলফ-চেক)</h2>
+        <p data-i18n="selfCheckDesc" style="color: var(--text-muted);">নিচের লক্ষণগুলোর মধ্যে কোনগুলো তোমার সাথে মিলছে? (টিক দাও, এটি কোনো ডাক্তারি পরীক্ষা নয়, জাস্ট তোমার অবস্থা বোঝার জন্য)</p>
+        
+        <div class="checklist-container">
+          <label class="checkbox-label">
+            <input type="checkbox" id="chk-sym-1">
+            <span class="custom-checkbox-box">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </span>
+            <span class="checkbox-text" data-i18n="checkSym1">হঠাৎ দম আটকে আসে এবং মনে হয় এখনই বড় কিছু হয়ে যাবে</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="chk-sym-2">
+            <span class="custom-checkbox-box">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </span>
+            <span class="checkbox-text" data-i18n="checkSym2">সামান্য কারণে হাত-পা কাঁপে এবং বুক ধড়ফড় করে</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="chk-sym-3">
+            <span class="custom-checkbox-box">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </span>
+            <span class="checkbox-text" data-i18n="checkSym3">অকারণে মনে হয় ভবিষ্যৎটা অন্ধকার বা খারাপ কিছু হতে যাচ্ছে</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="chk-sym-4">
+            <span class="custom-checkbox-box">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </span>
+            <span class="checkbox-text" data-i18n="checkSym4">রাতে ঘুমোতে গেলেই রাজ্যের দুশ্চিন্তা মাথায় এসে ভর করে</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="chk-sym-5">
+            <span class="custom-checkbox-box">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </span>
+            <span class="checkbox-text" data-i18n="checkSym5">প্যানিক অ্যাটাক আবার হতে পারে ভেবে একা বাইরে যেতে ভয় লাগে</span>
+          </label>
+        </div>
+
+        <div class="checklist-result-panel" id="checklist-result-text" data-i18n="checkResultDefault">
+          উপরে টিক দিয়ে তোমার অনুভূতিগুলো চিহ্নিত করো।
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer-box">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <div>
+            <h4 data-i18n="disclaimerTitle">গুরুত্বপূর্ণ ঘোষণা</h4>
+            <p data-i18n="disclaimerDesc">এটি কোনো ক্লিনিকাল ডায়াগনস্টিক টুল বা প্রেসক্রিপশন নয়। এটি শুধুমাত্র সাধারণ সচেতনতার জন্য তৈরি। যদি তোমার লক্ষণগুলো প্রতিদিনের কাজে বাধা সৃষ্টি করে বা তীব্র হয়, তবে দয়া করে একজন লাইসেন্সপ্রাপ্ত সাইকিয়াট্রিস্ট বা সাইকোলজিস্টের সাহায্য নাও।</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. RECOVERY TIPS SECTION -->
+    <section id="tips" class="page-section">
+      <div class="section-header">
+        <h2 data-i18n="tipsMainTitle">মুক্তির উপায় ও সহজ চর্চা</h2>
+        <p data-i18n="tipsMainSubtitle">উদ্বেগ ও প্যানিকের মুহূর্তগুলোতে নিজেকে শান্ত করার জন্য কিছু বাস্তবসম্মত এবং কার্যকরী টেকনিক। কার্ডগুলোতে ক্লিক করে বিস্তারিত জানো।</p>
+      </div>
+
+      <div class="tips-grid" id="tips-cards-container">
+        <!-- Tip Card 1 -->
+        <div class="tip-card reveal" id="tip-card-1">
+          <div class="tip-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          </div>
+          <h3 data-i18n="tip1Title">৫-৪-৩-২-১ গ্রাউন্ডিং টেকনিক</h3>
+          <p class="short-desc" data-i18n="tip1Short">যখন চারপাশের সবকিছু অবাস্তব মনে হয় এবং মন নিয়ন্ত্রণে থাকে না, তখন এই প্রাচীন পদ্ধতিটি কাজ করে।</p>
+          <div class="expanded-content" data-i18n="tip1Full">Detailed contents...</div>
+          <button class="btn-expand" aria-expanded="false">
+            <span data-i18n="expandBtn">বিস্তারিত জানো</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+        </div>
+
+        <!-- Tip Card 2 -->
+        <div class="tip-card reveal" id="tip-card-2">
+          <div class="tip-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>
+          </div>
+          <h3 data-i18n="tip2Title">বক্স ব্রিদিং (Box Breathing)</h3>
+          <p class="short-desc" data-i18n="tip2Short">আমেরিকান নেভি সিল (Navy Seals) কড়া মানসিক চাপের মুহূর্তে শান্ত থাকতে এই জাদুকরী শ্বাস-প্রশ্বাসের নিয়মটি ব্যবহার করে।</p>
+          <div class="expanded-content" data-i18n="tip2Full">Detailed contents...</div>
+          <button class="btn-expand" aria-expanded="false">
+            <span data-i18n="expandBtn">বিস্তারিত জানো</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+        </div>
+
+        <!-- Tip Card 3 -->
+        <div class="tip-card reveal" id="tip-card-3">
+          <div class="tip-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          </div>
+          <h3 data-i18n="tip3Title">ঠান্ডা পানির ম্যাজিক (Cold Water Trick)</h3>
+          <p class="short-desc" data-i18n="tip3Short">তীব্র ভয়ের মুহূর্তে শরীরকে এক ধাক্কায় শান্ত অবস্থায় ফিরিয়ে আনার সহজতম ও তাৎক্ষণিক উপায়।</p>
+          <div class="expanded-content" data-i18n="tip3Full">Detailed contents...</div>
+          <button class="btn-expand" aria-expanded="false">
+            <span data-i18n="expandBtn">বিস্তারিত জানো</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+        </div>
+
+        <!-- Tip Card 4 -->
+        <div class="tip-card reveal" id="tip-card-4">
+          <div class="tip-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+          </div>
+          <h3 data-i18n="tip4Title">ডায়েরি লেখা (Journaling Prompts)</h3>
+          <p class="short-desc" data-i18n="tip4Short">মনের এলোমেলো ভয়গুলোকে খাতায় লিখে ফেললে তাদের শক্তি অর্ধেকের বেশি কমে যায়।</p>
+          <div class="expanded-content" data-i18n="tip4Full">Detailed contents...</div>
+          <button class="btn-expand" aria-expanded="false">
+            <span data-i18n="expandBtn">বিস্তারিত জানো</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+        </div>
+
+        <!-- Tip Card 5 -->
+        <div class="tip-card reveal" id="tip-card-5">
+          <div class="tip-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+          </div>
+          <h3 data-i18n="tip5Title">ঘুম ও খাদ্যাভ্যাস (Sleep & Diet)</h3>
+          <p class="short-desc" data-i18n="tip5Short">শরীর যদি ক্লান্ত থাকে বা অতিরিক্ত ক্যাফেইন থাকে, তবে মনকে শান্ত রাখা অসম্ভব। কিছু প্রাত্যহিক পরিবর্তন।</p>
+          <div class="expanded-content" data-i18n="tip5Full">Detailed contents...</div>
+          <button class="btn-expand" aria-expanded="false">
+            <span data-i18n="expandBtn">বিস্তারিত জানো</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+        </div>
+
+        <!-- Tip Card 6 -->
+        <div class="tip-card reveal" id="tip-card-6">
+          <div class="tip-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
+          </div>
+          <h3 data-i18n="tip6Title">কখন ডাক্তারের সাহায্য নেবে?</h3>
+          <p class="short-desc" data-i18n="tip6Short">নিজেকে সাহায্য করা ভালো, কিন্তু যখন समस्याটি তোমার হাতের বাইরে চলে যায়, তখন পেশাদার পরামর্শ নেওয়া সবচেয়ে বুদ্ধিমানের কাজ।</p>
+          <div class="expanded-content" data-i18n="tip6Full">Detailed contents...</div>
+          <button class="btn-expand" aria-expanded="false">
+            <span data-i18n="expandBtn">বিস্তারিত জানো</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. BLOG GRID SECTION -->
+    <section id="blog" class="page-section">
+      <div class="section-header">
+        <h2 data-i18n="blogTitle">আমাদের মন ভালো করার ব্লগ</h2>
+        <p data-i18n="blogSubtitle">নিজের মতো করে লেখা কিছু মনস্তাত্ত্বিক অভিজ্ঞতা, বিজ্ঞান আর ঘুরে দাঁড়ানোর গল্প। যা তোমাকে মনে করাবে—তুমি একা নও।</p>
+      </div>
+
+      <!-- Categories Filter Tabs -->
+      <div class="blog-category-nav" id="blog-filters">
+        <button class="category-tab active" data-category="all" data-i18n="catAll">সব পোস্ট</button>
+        <button class="category-tab" data-category="panic" data-i18n="catPanic">প্যানিক ডিসঅর্ডার</button>
+        <button class="category-tab" data-category="anxiety" data-i18n="catAnxiety">উদ্বেগ</button>
+        <button class="category-tab" data-category="selfCare" data-i18n="catSelfCare">নিজেকে ভালো রাখা</button>
+        <button class="category-tab" data-category="stories" data-i18n="catStories">সফলতার গল্প</button>
+      </div>
+
+      <!-- Grid Container -->
+      <div class="blog-grid" id="blog-grid-content"></div>
+    </section>
+
+    <!-- 5. SHOP SECTION -->
+    <section id="shop" class="page-section">
+      <div class="section-header">
+        <h2 data-i18n="shopTitle">মন ভালো করার বইঘর</h2>
+        <p data-i18n="shopSubtitle">তোমার মনের যত্নে ও আত্মউন্নয়নে আমাদের তৈরি করা কয়েকটি নির্দেশিকা ও ওয়ার্কবুক। এগুলো তোমাকে প্যানিক ও ভয় দূর করতে প্রতিদিন গাইড করবে।</p>
+      </div>
+
+      <div class="shop-grid" id="shop-items-container"></div>
+
+      <!-- Manual Payment Details Box -->
+      <div class="payment-guide-box reveal" id="shop-payment-guide">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
+          <line x1="2" y1="10" x2="22" y2="10"></line>
+        </svg>
+        <div>
+          <h4 data-i18n="paymentNoteTitle">পেমেন্ট পদ্ধতি:</h4>
+          <p data-i18n="paymentNoteDesc">বিকাশ (bKash) / নগদ (Nagad) / রকেট বা কার্ডের মাধ্যমে পেমেন্ট করতে পারবেন। অর্ডার করার পর আপনার ইমেইলে পেমেন্ট লিংক এবং নির্দেশিকা পাঠানো হবে। পেমেন্ট সম্পূর্ণ হওয়ার পর ইমেইলেই ই-বুকটি (PDF) ডেলিভারি দেওয়া হবে।</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. ABOUT US SECTION -->
+    <section id="about" class="page-section">
+      <div class="about-hero">
+        <h1 data-i18n="aboutTitle">আমাদের গল্প: কেন মনভালো?</h1>
+        <p data-i18n="aboutSubtitle">আমরা কোনো ক্লিনিকাল ডাক্তার নই, তবে আমরা মনের ব্যথা বুঝি।</p>
+      </div>
+
+      <!-- Story grid -->
+      <div class="about-story-container reveal" id="about-story-block">
+        <div class="about-story-text">
+          <h2 data-i18n="aboutStoryTitle">শুরুর কথা</h2>
+          <p data-i18n="aboutStoryDesc1">Lorem ipsum dolor sit amet...</p>
+          <p data-i18n="aboutStoryDesc2">Lorem ipsum dolor sit amet...</p>
+        </div>
+        <div class="about-story-media">
+          <!-- Empathetic Illustration/Symbol using inline SVG -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1.5">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Mission Grid -->
+      <div class="about-mission-grid reveal" id="about-mission-block">
+        <div class="mission-box">
+          <h3 data-i18n="aboutMissionTitle">আমাদের লক্ষ্য (Mission)</h3>
+          <p data-i18n="aboutMissionDesc">Lorem ipsum dolor sit amet...</p>
+        </div>
+        <div class="mission-box">
+          <h3 data-i18n="aboutDisclaimerTitle">নিরাপত্তা ঘোষণা</h3>
+          <p data-i18n="aboutDisclaimerDesc">Lorem ipsum dolor sit amet...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. CONTACT SECTION -->
+    <section id="contact" class="page-section">
+      <div class="section-header">
+        <h2 data-i18n="contactTitle">তোমার কথা আমাদের জানাও</h2>
+        <p data-i18n="contactSubtitle">মনের যেকোনো কথা, মতামত বা সাহায্যের জন্য আমাদের লিখতে পারো। আমরা মন দিয়ে তোমার কথা শুনবো।</p>
+      </div>
+
+      <div class="contact-layout reveal" id="contact-page-layout">
+        <!-- Form -->
+        <div class="contact-form-card">
+          <form id="contact-form">
+            <div class="form-group">
+              <label for="contact-name" data-i18n="formName">তোমার নাম</label>
+              <input type="text" id="contact-name" class="form-input" data-i18n-placeholder="contactNamePlaceholder" placeholder="তোমার নাম লেখো" required>
+            </div>
+            <div class="form-group">
+              <label for="contact-email" data-i18n="formEmail">তোমার ইমেইল ঠিকানা</label>
+              <input type="email" id="contact-email" class="form-input" data-i18n-placeholder="contactEmailPlaceholder" placeholder="তোমার ইমেইল ঠিকানা" required>
+            </div>
+            <div class="form-group">
+              <label for="contact-message" data-i18n="contactMsgPlaceholder">তোমার মনের কথাটি এখানে খুলে বলো...</label>
+              <textarea id="contact-message" class="form-input" data-i18n-placeholder="contactMsgPlaceholder" placeholder="তোমার মনের কথাটি এখানে খুলে বলো..." required></textarea>
+            </div>
+            <button type="submit" class="btn-primary" id="btn-contact-submit">
+              <span data-i18n="contactBtnSend">বার্তা পাঠাও</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+          </form>
+        </div>
+
+        <!-- Info details -->
+        <div class="contact-info-column">
+          <div class="info-block">
+            <h3 data-i18n="contactDetailsTitle">যোগাযোগের অন্যান্য মাধ্যম</h3>
+            <p data-i18n="contactDetailsDesc">পেমেন্ট সংক্রান্ত সমস্যা বা ই-বুক সংক্রান্ত যেকোনো জরুরি তথ্যের জন্য মেইল করতে পারো:</p>
+            <a href="mailto:support@monvalo.com" class="mail-link" id="contact-mail-address">support@monvalo.com</a>
+            <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted);" data-i18n="contactResponseNote">*আমরা প্রতিটি মেইল খুব যত্নসহকারে পড়ি এবং উত্তর দেওয়ার সর্বোচ্চ চেষ্টা করি।</p>
+          </div>
+
+          <div class="info-block">
+            <h3 data-i18n="contactSocialsTitle">আমাদের সোশ্যাল মিডিয়া</h3>
+            <div class="social-links-row">
+              <a href="#" class="social-btn" aria-label="Facebook">
+                <svg width="20" height="20" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+              </a>
+              <a href="#" class="social-btn" aria-label="Instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+              <a href="#" class="social-btn" aria-label="YouTube">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dynamic full blog article reader section -->
+    <section id="blog-reader" class="blog-reader-view"></section>
+
+  </main>
+
+  <!-- ==========================================================================
+       MODALS SYSTEMS (Checkout, Success, Forms)
+       ========================================================================== -->
+  <!-- 1. Checkout Order Form Modal -->
+  <div class="modal-overlay" id="checkout-modal">
+    <div class="modal-card">
+      <button class="modal-close-btn btn-close-modal" aria-label="Close Modal">✕</button>
+      <h2 data-i18n="checkoutTitle">অর্ডার ফর্ম</h2>
+      <p class="desc" data-i18n="checkoutDesc">দয়া করে নিচের তথ্যগুলো পূরণ করো। আমরা খুব শীঘ্রই তোমার ইমেইলে পেমেন্ট ডিটেইলস এবং ডাউনলোড লিংক পাঠিয়ে দেবো।</p>
+      
+      <form id="checkout-form">
+        <div class="form-group">
+          <label for="checkout-name" data-i18n="formName">তোমার নাম</label>
+          <input type="text" id="checkout-name" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="checkout-email" data-i18n="formEmail">তোমার ইমেইল ঠিকানা</label>
+          <input type="email" id="checkout-email" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="checkout-phone" data-i18n="formPhone">মোবাইল নম্বর</label>
+          <input type="tel" id="checkout-phone" class="form-input" required>
+        </div>
+        
+        <div class="modal-buttons-row">
+          <button type="button" class="btn-secondary btn-close-modal" data-i18n="btnCancel">বাতিল করো</button>
+          <button type="submit" class="btn-primary" id="btn-submit-order" data-i18n="btnConfirmOrder">অর্ডার নিশ্চিত করো</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. Order Purchase Success Modal -->
+  <div class="modal-overlay" id="order-success-modal">
+    <div class="modal-card success-state-box">
+      <button class="modal-close-btn btn-close-modal" aria-label="Close Modal">✕</button>
+      <div class="icon-success">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <h2 data-i18n="orderSuccessTitle">অর্ডার সফল হয়েছে! 🎉</h2>
+      <p data-i18n="orderSuccessDesc">আমরা তোমার অর্ডারটি পেয়েছি। পরবর্তী ১০ মিনিটের মধ্যে তোমার ইমেইলে বিকাশ/নগদ পেমেন্ট লিংক এবং কিভাবে ই-বুকটি ডাউনলোড করবে তার নির্দেশিকা চলে যাবে। মন ভালো হোক!</p>
+      <div class="modal-buttons-row" style="justify-content: center; margin-top: 2.5rem;">
+        <button type="button" class="btn-primary btn-close-modal" data-i18n="btnClose">বন্ধ করো</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Contact Form Submission Success Modal -->
+  <div class="modal-overlay" id="contact-success-modal">
+    <div class="modal-card success-state-box">
+      <button class="modal-close-btn btn-close-modal" aria-label="Close Modal">✕</button>
+      <div class="icon-success">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+      </div>
+      <h2 data-i18n="contactSuccessTitle">তোমার বার্তাটি আমরা পেয়েছি! ❤️</h2>
+      <p data-i18n="contactSuccessDesc">আমাদের সাথে কথা শেয়ার করার জন্য ধন্যবাদ। আমরা ২৪ থেকে ৪৮ ঘণ্টার মধ্যে তোমার ইমেইলে উত্তর দেওয়ার চেষ্টা করবো। মনে রাখবে, তুমি একা নও।</p>
+      <div class="modal-buttons-row" style="justify-content: center; margin-top: 2.5rem;">
+        <button type="button" class="btn-primary btn-close-modal" data-i18n="btnClose">বন্ধ করো</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">monvalo.</div>
+      <p data-i18n="footerText">মন ভালো হোক, মন ভালো থাক। © ২০২৬ মনভালো.কম</p>
+      <p class="footer-disclaimer-text" data-i18n="footerDisclaimer">সতর্কতা: আমরা কোনো পেশাদার চিকিৎসা পরামর্শ বা ডাক্তার নই। তীব্র মানসিক সমস্যায় অবিলম্বে একজন বিশেষজ্ঞের পরামর্শ নিন।</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="translations.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
