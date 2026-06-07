@@ -1107,10 +1107,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("zen-canvas");
   const ctx = canvas ? canvas.getContext("2d") : null;
   const btnClearCanvas = document.getElementById("btn-clear-canvas");
+  const btnToggleMandala = document.getElementById("btn-toggle-mandala");
+  const mandalaBtnText = document.getElementById("mandala-btn-text");
   
   let drawing = false;
   let lastX = 0;
   let lastY = 0;
+  let isMandalaMode = true; // Enabled by default to make drawings look beautiful automatically
+  let hue = 0;
 
   if (canvas && ctx) {
     // Resize canvas to parent width
@@ -1125,7 +1129,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function setupCanvasStyles() {
       const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim() || '#FF6B6B';
       ctx.strokeStyle = primaryColor;
-      ctx.lineWidth = 6;
+      ctx.lineWidth = isMandalaMode ? 3.5 : 6; // slightly thinner brush for intricate mandala segments
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
       ctx.shadowBlur = 10;
@@ -1197,13 +1201,59 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const coords = getCoords(e);
       
-      ctx.beginPath();
-      ctx.moveTo(lastX, lastY);
-      ctx.lineTo(coords.x, coords.y);
-      ctx.stroke();
+      if (isMandalaMode) {
+        hue = (hue + 1) % 360;
+        const brushColor = `hsla(${hue}, 85%, 60%, 0.95)`;
+        ctx.strokeStyle = brushColor;
+        ctx.shadowColor = brushColor;
+        
+        drawSymmetricLine(lastX, lastY, coords.x, coords.y);
+      } else {
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(coords.x, coords.y);
+        ctx.stroke();
+      }
 
       lastX = coords.x;
       lastY = coords.y;
+    }
+
+    function drawSymmetricLine(x1, y1, x2, y2) {
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
+      const segments = 8;
+      
+      const dx1 = x1 - cx;
+      const dy1 = y1 - cy;
+      const dx2 = x2 - cx;
+      const dy2 = y2 - cy;
+      
+      for (let i = 0; i < segments; i++) {
+        const angle = (Math.PI * 2 / segments) * i;
+        
+        // Rotate points
+        const rx1 = dx1 * Math.cos(angle) - dy1 * Math.sin(angle);
+        const ry1 = dx1 * Math.sin(angle) + dy1 * Math.cos(angle);
+        const rx2 = dx2 * Math.cos(angle) - dy2 * Math.sin(angle);
+        const ry2 = dx2 * Math.sin(angle) + dy2 * Math.cos(angle);
+        
+        ctx.beginPath();
+        ctx.moveTo(cx + rx1, cy + ry1);
+        ctx.lineTo(cx + rx2, cy + ry2);
+        ctx.stroke();
+        
+        // Mirror reflection line
+        const mx1 = dx1 * Math.cos(angle) + dy1 * Math.sin(angle);
+        const my1 = dx1 * Math.sin(angle) - dy1 * Math.cos(angle);
+        const mx2 = dx2 * Math.cos(angle) + dy2 * Math.sin(angle);
+        const my2 = dx2 * Math.sin(angle) - dy2 * Math.cos(angle);
+        
+        ctx.beginPath();
+        ctx.moveTo(cx + mx1, cy + my1);
+        ctx.lineTo(cx + mx2, cy + my2);
+        ctx.stroke();
+      }
     }
 
     function stopDrawing() {
@@ -1225,6 +1275,22 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnClearCanvas) {
       btnClearCanvas.addEventListener("click", () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+      });
+    }
+
+    // Toggle Mandala Mode
+    if (btnToggleMandala && mandalaBtnText) {
+      btnToggleMandala.addEventListener("click", () => {
+        isMandalaMode = !isMandalaMode;
+        
+        if (isMandalaMode) {
+          mandalaBtnText.setAttribute("data-i18n", "toolScratchMandalaOn");
+        } else {
+          mandalaBtnText.setAttribute("data-i18n", "toolScratchMandalaOff");
+        }
+        
+        setupCanvasStyles();
+        translatePage();
       });
     }
   }

@@ -278,6 +278,8 @@ const translations = {
     toolScratchTitle: "✨ জেন ড্রয়িং বোর্ড (Zen Canvas)",
     toolScratchDesc: "হিজিবিজি ছবি এঁকে মনকে শান্ত করো। তোমার আঁকা রেখাগুলো মেঘের মতো একটু পরেই ক্যানভাস থেকে বাতাসে মিলিয়ে যাবে।",
     toolScratchClear: "মুছে ফেলো",
+    toolScratchMandalaOn: "ম্যান্ডালা মোড: চালু",
+    toolScratchMandalaOff: "ম্যান্ডালা মোড: বন্ধ",
 
     // Tool 7: Worry Burner
     toolBurnTitle: "🔥 চিন্তা ভস্ম করার বাক্স (Worry Burner)",
@@ -562,6 +564,8 @@ const translations = {
     toolScratchTitle: "✨ Zen Drawing Board (Zen Canvas)",
     toolScratchDesc: "Calm your mind by sketching or doodling. The lines you draw will slowly fade away like clouds in the sky.",
     toolScratchClear: "Clear Canvas",
+    toolScratchMandalaOn: "Mandala Mode: ON",
+    toolScratchMandalaOff: "Mandala Mode: OFF",
 
     // Tool 7: Worry Burner
     toolBurnTitle: "🔥 Worry Burner",

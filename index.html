@@ -686,7 +686,7 @@
       </div>
 
       <!-- Synthesized Ambient Sound Mixer -->
-      <div class="condition-section-block reveal" id="tool-mixer-block" style="margin-bottom: 2rem;">
+      <div class="condition-section-block reveal" id="tool-mixer-block" style="margin-bottom: 3.5rem;">
         <h3 data-i18n="toolMixerTitle" style="font-size: 1.8rem; color: var(--color-primary); margin-bottom: 0.5rem; font-weight: 700;">🌧️ রিলাক্সিং সাউন্ড মিক্সার (Ambient Mixer)</h3>
         <p data-i18n="toolMixerDesc" style="color: var(--text-muted); margin-bottom: 2.5rem;"></p>
         
@@ -740,39 +740,42 @@
       </div>
 
       <!-- Zen Drawing Board Card -->
-          <div class="condition-section-block reveal" id="tool-scratch-block" style="margin-bottom: 3.5rem;">
-            <h3 data-i18n="toolScratchTitle" style="font-size: 1.8rem; color: var(--color-primary); margin-bottom: 0.5rem; font-weight: 700;">✨ জেন ড্রয়িং বোর্ড (Zen Canvas)</h3>
-            <p data-i18n="toolScratchDesc" style="color: var(--text-muted); margin-bottom: 1.5rem;"></p>
-            
-            <div class="zen-canvas-container" style="max-width: 600px; margin: 0 auto; text-align: center;">
-              <div class="canvas-wrapper" style="position: relative; border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); background: var(--bg-secondary); margin-bottom: 1.5rem; height: 320px; box-shadow: var(--shadow-sm);">
-                <canvas id="zen-canvas" style="display: block; width: 100%; height: 100%; cursor: crosshair;"></canvas>
-              </div>
-              <button class="btn-secondary" id="btn-clear-canvas" style="border-radius: 20px; padding: 0.5rem 1.5rem;">
-                <span data-i18n="toolScratchClear">মুছে ফেলো</span>
-              </button>
-            </div>
+      <div class="condition-section-block reveal" id="tool-scratch-block" style="margin-bottom: 3.5rem;">
+        <h3 data-i18n="toolScratchTitle" style="font-size: 1.8rem; color: var(--color-primary); margin-bottom: 0.5rem; font-weight: 700;">✨ জেন ড্রয়িং বোর্ড (Zen Canvas)</h3>
+        <p data-i18n="toolScratchDesc" style="color: var(--text-muted); margin-bottom: 1.5rem;"></p>
+        
+        <div class="zen-canvas-container" style="max-width: 600px; margin: 0 auto; text-align: center;">
+          <div class="canvas-wrapper" style="position: relative; border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); background: var(--bg-secondary); margin-bottom: 1.5rem; height: 320px; box-shadow: var(--shadow-sm);">
+            <canvas id="zen-canvas" style="display: block; width: 100%; height: 100%; cursor: crosshair;"></canvas>
           </div>
+          <button class="btn-secondary" id="btn-toggle-mandala" style="border-radius: 20px; padding: 0.5rem 1.5rem; margin-right: 0.5rem;">
+            <span id="mandala-btn-text" data-i18n="toolScratchMandalaOn">ম্যান্ডালা মোড: চালু</span>
+          </button>
+          <button class="btn-secondary" id="btn-clear-canvas" style="border-radius: 20px; padding: 0.5rem 1.5rem;">
+            <span data-i18n="toolScratchClear">মুছে ফেলো</span>
+          </button>
+        </div>
+      </div>
 
-          <!-- Worry Burner Card -->
-          <div class="condition-section-block reveal" id="tool-burn-block" style="margin-bottom: 3.5rem;">
-            <h3 data-i18n="toolBurnTitle" style="font-size: 1.8rem; color: var(--color-primary); margin-bottom: 0.5rem; font-weight: 700;">🔥 চিন্তা ভস্ম করার বাক্স (Worry Burner)</h3>
-            <p data-i18n="toolBurnDesc" style="color: var(--text-muted); margin-bottom: 1.5rem;"></p>
+      <!-- Worry Burner Card -->
+      <div class="condition-section-block reveal" id="tool-burn-block" style="margin-bottom: 3.5rem;">
+        <h3 data-i18n="toolBurnTitle" style="font-size: 1.8rem; color: var(--color-primary); margin-bottom: 0.5rem; font-weight: 700;">🔥 চিন্তা ভস্ম করার বাক্স (Worry Burner)</h3>
+        <p data-i18n="toolBurnDesc" style="color: var(--text-muted); margin-bottom: 1.5rem;"></p>
+        
+        <div class="worry-burner-container" style="max-width: 600px; margin: 0 auto; text-align: center; position: relative;">
+          <div class="burner-textarea-wrapper" id="burner-wrapper" style="position: relative; margin-bottom: 1.5rem; border-radius: 16px; border: 1px solid var(--border-color); overflow: hidden; background: var(--bg-secondary);">
+            <!-- Overlay for burning animation -->
+            <div class="burner-ash-overlay" id="worry-burn-overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 1.5rem; text-align: left; font-size: 1.1rem; line-height: 1.6; word-wrap: break-word; overflow-y: auto; pointer-events: none; z-index: 10; font-family: var(--font-body); font-style: italic;"></div>
             
-            <div class="worry-burner-container" style="max-width: 600px; margin: 0 auto; text-align: center; position: relative;">
-              <div class="burner-textarea-wrapper" id="burner-wrapper" style="position: relative; margin-bottom: 1.5rem; border-radius: 16px; border: 1px solid var(--border-color); overflow: hidden; background: var(--bg-secondary);">
-                <!-- Overlay for burning animation -->
-                <div class="burner-ash-overlay" id="worry-burn-overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 1.5rem; text-align: left; font-size: 1.1rem; line-height: 1.6; word-wrap: break-word; overflow-y: auto; pointer-events: none; z-index: 10; font-family: var(--font-body); font-style: italic;"></div>
-                
-                <textarea id="worry-burn-input" class="form-input" data-i18n-placeholder="toolBurnPlaceholder" placeholder="তোমার ক্ষোভ বা চিন্তাগুলো এখানে লেখো..." required style="width: 100%; height: 180px; border: none; border-radius: 0; background: transparent; padding: 1.5rem; font-size: 1.1rem; resize: none; outline: none; box-shadow: none; display: block; margin: 0; box-sizing: border-box;"></textarea>
-              </div>
-              
-              <button class="btn-primary" id="btn-worry-burn" style="border-radius: 20px; padding: 0.75rem 2.5rem; background-color: #E25822; border-color: #E25822; font-weight: 700; box-shadow: 0 4px 15px rgba(226, 88, 34, 0.3);">
-                <span data-i18n="toolBurnBtn">ভস্ম করো (Burn It)</span>
-              </button>
-              <p id="burn-success-msg" class="reveal" style="display: none; color: var(--color-success); font-weight: 700; margin-top: 1.5rem;" data-i18n="toolBurnSuccess"></p>
-            </div>
+            <textarea id="worry-burn-input" class="form-input" data-i18n-placeholder="toolBurnPlaceholder" placeholder="তোমার ক্ষোভ বা চিন্তাগুলো এখানে লেখো..." required style="width: 100%; height: 180px; border: none; border-radius: 0; background: transparent; padding: 1.5rem; font-size: 1.1rem; resize: none; outline: none; box-shadow: none; display: block; margin: 0; box-sizing: border-box;"></textarea>
           </div>
+          
+          <button class="btn-primary" id="btn-worry-burn" style="border-radius: 20px; padding: 0.75rem 2.5rem; background-color: #E25822; border-color: #E25822; font-weight: 700; box-shadow: 0 4px 15px rgba(226, 88, 34, 0.3);">
+            <span data-i18n="toolBurnBtn">ভস্ম করো (Burn It)</span>
+          </button>
+          <p id="burn-success-msg" class="reveal" style="display: none; color: var(--color-success); font-weight: 700; margin-top: 1.5rem;" data-i18n="toolBurnSuccess"></p>
+        </div>
+      </div>
           
     </section>
 
