@@ -564,6 +564,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!name || !email || !phone) return;
 
+      // Security Validations
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const phoneRegex = /^\+?[0-9\s\-()]{6,20}$/;
+
+      if (name.length < 2 || /<[^>]*>/g.test(name)) {
+        alert(currentLang === 'bn' ? 'দয়া করে একটি সঠিক নাম লিখুন।' : 'Please enter a valid name.');
+        return;
+      }
+      if (!emailRegex.test(email)) {
+        alert(currentLang === 'bn' ? 'দয়া করে একটি সঠিক ইমেল ঠিকানা দিন।' : 'Please enter a valid email address.');
+        return;
+      }
+      if (!phoneRegex.test(phone)) {
+        alert(currentLang === 'bn' ? 'দয়া করে একটি সঠিক মোবাইল নম্বর দিন।' : 'Please enter a valid phone number.');
+        return;
+      }
+
       // Close checkout modal
       if (checkoutModal) checkoutModal.classList.remove("active");
       checkoutForm.reset();
@@ -590,6 +607,22 @@ document.addEventListener("DOMContentLoaded", () => {
       const msg = contactForm.querySelector("textarea").value.trim();
 
       if (!name || !email || !msg) return;
+
+      // Security Validations
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (name.length < 2 || /<[^>]*>/g.test(name)) {
+        alert(currentLang === 'bn' ? 'দয়া করে একটি সঠিক নাম লিখুন।' : 'Please enter a valid name.');
+        return;
+      }
+      if (!emailRegex.test(email)) {
+        alert(currentLang === 'bn' ? 'দয়া করে একটি সঠিক ইমেল ঠিকানা দিন।' : 'Please enter a valid email address.');
+        return;
+      }
+      if (msg.length < 5 || /<[^>]*>/g.test(msg)) {
+        alert(currentLang === 'bn' ? 'দয়া করে একটি বিস্তারিত বার্তা লিখুন।' : 'Please enter a valid message.');
+        return;
+      }
 
       contactForm.reset();
 
@@ -1219,7 +1252,14 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (char === " ") {
           html += '<span class="ash-char">&nbsp;</span>';
         } else {
-          html += `<span class="ash-char">${char}</span>`;
+          let escapedChar = char;
+          if (char === '<') escapedChar = '&lt;';
+          else if (char === '>') escapedChar = '&gt;';
+          else if (char === '&') escapedChar = '&amp;';
+          else if (char === '"') escapedChar = '&quot;';
+          else if (char === "'") escapedChar = '&#x27;';
+          else if (char === '/') escapedChar = '&#x2F;';
+          html += `<span class="ash-char">${escapedChar}</span>`;
         }
       }
 
