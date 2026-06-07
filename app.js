@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================================================================
   let currentLang = localStorage.getItem("lang") || "bn";
   let currentTheme = localStorage.getItem("theme") || "light";
+  let resizeZenCanvas = null; // hook for routing canvas resize
 
   // Set initial classes and trigger update
   document.documentElement.classList.toggle("dark", currentTheme === "dark");
@@ -242,6 +243,9 @@ document.addEventListener("DOMContentLoaded", () => {
       
       if (rawHash === targetHash) {
         sec.classList.add("active");
+        if (id === "tools" && typeof resizeZenCanvas === "function") {
+          setTimeout(resizeZenCanvas, 50);
+        }
       } else {
         sec.classList.remove("active");
       }
@@ -1131,17 +1135,19 @@ document.addEventListener("DOMContentLoaded", () => {
     // Set canvas dimensions
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
+    resizeZenCanvas = resizeCanvas; // register callback for routing
+    setTimeout(resizeCanvas, 100); // safety fallback for layout calculations
 
     // Fade loop
     function fadeLoop() {
       // Fetch background color based on active theme
       const computedBg = getComputedStyle(canvas.parentElement).backgroundColor;
-      let fadeStyle = "rgba(254, 232, 214, 0.03)"; // default light mode
+      let fadeStyle = "rgba(254, 232, 214, 0.012)"; // default light mode (slower fade for premium feel)
       if (computedBg) {
         if (computedBg.startsWith("rgb")) {
           const rgbValues = computedBg.match(/\d+/g);
           if (rgbValues && rgbValues.length >= 3) {
-            fadeStyle = `rgba(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]}, 0.035)`;
+            fadeStyle = `rgba(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]}, 0.012)`;
           }
         }
       }
