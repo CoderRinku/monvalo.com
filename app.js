@@ -957,6 +957,307 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+  // ==========================================================================
+  // TOOL 5: EMERGENCY SOS PANIC OVERLAY
+  // ==========================================================================
+  const sosTrigger = document.getElementById("btn-sos-trigger");
+  const sosOverlay = document.getElementById("emergency-sos-overlay");
+  const sosClose = document.getElementById("btn-sos-close");
+  const btnSosFinish = document.getElementById("btn-sos-finish");
+  
+  const sosSteps = [
+    document.getElementById("sos-step-1"),
+    document.getElementById("sos-step-2"),
+    document.getElementById("sos-step-3")
+  ];
+  
+  let sosBreatheInterval = null;
+  let sosBreatheCounter = 0;
+
+  function showSosStep(stepNum) {
+    sosSteps.forEach((step, idx) => {
+      if (step) {
+        step.style.display = (idx + 1) === stepNum ? "block" : "none";
+      }
+    });
+
+    // Handle breathing guide on step 3
+    if (stepNum === 3) {
+      startSosBreathing();
+    } else {
+      stopSosBreathing();
+    }
+  }
+
+  function openSosOverlay() {
+    if (sosOverlay) {
+      sosOverlay.style.display = "flex";
+      showSosStep(1);
+    }
+  }
+
+  function closeSosOverlay() {
+    if (sosOverlay) {
+      sosOverlay.style.display = "none";
+      stopSosBreathing();
+    }
+  }
+
+  function startSosBreathing() {
+    stopSosBreathing();
+    const circle = document.getElementById("sos-breathe-circle");
+    const status = document.getElementById("sos-breathe-status");
+    if (!circle || !status) return;
+
+    sosBreatheCounter = 0;
+
+    const updateSosBreathing = () => {
+      const phase = sosBreatheCounter % 16;
+      const trans = translations[currentLang];
+      
+      // Clean up previous classes
+      circle.className = "sos-breathing-circle";
+
+      if (phase >= 0 && phase < 4) {
+        circle.classList.add("inhale");
+        status.innerText = trans.breatheStateInhale || "Inhale";
+      } else if (phase >= 4 && phase < 8) {
+        circle.classList.add("hold");
+        status.innerText = trans.breatheStateHold || "Hold";
+      } else if (phase >= 8 && phase < 12) {
+        circle.classList.add("exhale");
+        status.innerText = trans.breatheStateExhale || "Exhale";
+      } else {
+        circle.classList.add("rest");
+        status.innerText = trans.breatheStateRest || "Rest";
+      }
+      sosBreatheCounter++;
+    };
+
+    updateSosBreathing();
+    sosBreatheInterval = setInterval(updateSosBreathing, 1000);
+  }
+
+  function stopSosBreathing() {
+    if (sosBreatheInterval) {
+      clearInterval(sosBreatheInterval);
+      sosBreatheInterval = null;
+    }
+  }
+
+  if (sosTrigger) sosTrigger.addEventListener("click", openSosOverlay);
+  if (sosClose) sosClose.addEventListener("click", closeSosOverlay);
+  if (btnSosFinish) btnSosFinish.addEventListener("click", closeSosOverlay);
+
+  // Bind Next / Prev buttons
+  document.querySelectorAll(".btn-sos-next").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const nextStep = parseInt(btn.getAttribute("data-next"), 10);
+      showSosStep(nextStep);
+    });
+  });
+
+  document.querySelectorAll(".btn-sos-prev").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const prevStep = parseInt(btn.getAttribute("data-prev"), 10);
+      showSosStep(prevStep);
+    });
+  });
+
+  // ==========================================================================
+  // TOOL 6: ZEN DRAWING BOARD (Zen Canvas)
+  // ==========================================================================
+  const canvas = document.getElementById("zen-canvas");
+  const ctx = canvas ? canvas.getContext("2d") : null;
+  const btnClearCanvas = document.getElementById("btn-clear-canvas");
+  
+  let drawing = false;
+  let lastX = 0;
+  let lastY = 0;
+
+  if (canvas && ctx) {
+    // Resize canvas to parent width
+    function resizeCanvas() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height || 320;
+      // Re-apply drawing styles after resize
+      setupCanvasStyles();
+    }
+
+    function setupCanvasStyles() {
+      const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim() || '#FF6B6B';
+      ctx.strokeStyle = primaryColor;
+      ctx.lineWidth = 6;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = primaryColor;
+    }
+
+    // Set canvas dimensions
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    // Fade loop
+    function fadeLoop() {
+      // Fetch background color based on active theme
+      const computedBg = getComputedStyle(canvas.parentElement).backgroundColor;
+      let fadeStyle = "rgba(254, 232, 214, 0.03)"; // default light mode
+      if (computedBg) {
+        if (computedBg.startsWith("rgb")) {
+          const rgbValues = computedBg.match(/\d+/g);
+          if (rgbValues && rgbValues.length >= 3) {
+            fadeStyle = `rgba(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]}, 0.035)`;
+          }
+        }
+      }
+
+      ctx.fillStyle = fadeStyle;
+      // Disable shadow blur for the fade rect to avoid glowing edges
+      const prevShadowBlur = ctx.shadowBlur;
+      ctx.shadowBlur = 0;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.shadowBlur = prevShadowBlur;
+
+      requestAnimationFrame(fadeLoop);
+    }
+    
+    // Start the fade loop
+    requestAnimationFrame(fadeLoop);
+
+    // Drawing helper
+    function getCoords(e) {
+      const rect = canvas.getBoundingClientRect();
+      if (e.touches && e.touches.length > 0) {
+        return {
+          x: e.touches[0].clientX - rect.left,
+          y: e.touches[0].clientY - rect.top
+        };
+      } else {
+        return {
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top
+        };
+      }
+    }
+
+    function startDrawing(e) {
+      drawing = true;
+      const coords = getCoords(e);
+      lastX = coords.x;
+      lastY = coords.y;
+      
+      // Update primary color in case theme changed
+      setupCanvasStyles();
+    }
+
+    function draw(e) {
+      if (!drawing) return;
+      e.preventDefault(); // prevent scrolling while drawing
+
+      const coords = getCoords(e);
+      
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(coords.x, coords.y);
+      ctx.stroke();
+
+      lastX = coords.x;
+      lastY = coords.y;
+    }
+
+    function stopDrawing() {
+      drawing = false;
+    }
+
+    // Mouse Listeners
+    canvas.addEventListener("mousedown", startDrawing);
+    canvas.addEventListener("mousemove", draw);
+    canvas.addEventListener("mouseup", stopDrawing);
+    canvas.addEventListener("mouseleave", stopDrawing);
+
+    // Touch Listeners
+    canvas.addEventListener("touchstart", startDrawing, { passive: false });
+    canvas.addEventListener("touchmove", draw, { passive: false });
+    canvas.addEventListener("touchend", stopDrawing);
+
+    // Clear Canvas
+    if (btnClearCanvas) {
+      btnClearCanvas.addEventListener("click", () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      });
+    }
+  }
+
+  // ==========================================================================
+  // TOOL 7: WORRY BURNER
+  // ==========================================================================
+  const burnInput = document.getElementById("worry-burn-input");
+  const burnBtn = document.getElementById("btn-worry-burn");
+  const burnOverlay = document.getElementById("worry-burn-overlay");
+  const burnWrapper = document.getElementById("burner-wrapper");
+  const burnSuccess = document.getElementById("burn-success-msg");
+
+  if (burnInput && burnBtn && burnOverlay && burnWrapper) {
+    burnBtn.addEventListener("click", () => {
+      const text = burnInput.value.trim();
+      if (!text) return;
+
+      // Disable inputs
+      burnInput.disabled = true;
+      burnBtn.disabled = true;
+      burnSuccess.style.display = "none";
+      burnWrapper.classList.add("burning");
+
+      // Generate HTML with characters for burning
+      let html = "";
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        if (char === "\n") {
+          html += "<br>";
+        } else if (char === " ") {
+          html += '<span class="ash-char">&nbsp;</span>';
+        } else {
+          html += `<span class="ash-char">${char}</span>`;
+        }
+      }
+
+      burnOverlay.innerHTML = html;
+      burnOverlay.style.display = "block";
+      
+      // Hide the textarea input visually
+      burnInput.style.opacity = "0";
+
+      // Trigger staggered burn animation
+      const spans = burnOverlay.querySelectorAll(".ash-char");
+      spans.forEach((span, idx) => {
+        const delay = Math.min(idx * 12, 1000); // Max 1s stagger
+        span.style.animationDelay = `${delay}ms`;
+        span.classList.add("burn");
+      });
+
+      // Cleanup and reset after animation completes
+      setTimeout(() => {
+        burnOverlay.style.display = "none";
+        burnOverlay.innerHTML = "";
+
+        burnInput.value = "";
+        burnInput.style.opacity = "1";
+        burnInput.disabled = false;
+        
+        burnBtn.disabled = false;
+        burnWrapper.classList.remove("burning");
+
+        if (burnSuccess) {
+          burnSuccess.style.display = "block";
+          setTimeout(() => {
+            burnSuccess.style.display = "none";
+          }, 5000);
+        }
+      }, 3500); // 2.5s animation duration + 1s max stagger delay
+    });
+  }
 
   // ==========================================================================
   // INITIALIZATION

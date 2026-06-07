@@ -2014,3 +2014,248 @@ footer {
 .mixer-slider::-moz-range-thumb:hover {
   transform: scale(1.2);
 }
+
+/* ==========================================================================
+   PANIC SOS FULLSCREEN OVERLAY
+   ========================================================================== */
+.sos-overlay-full {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(13, 10, 10, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.sos-container {
+  width: 100%;
+  max-width: 650px;
+  background: rgba(22, 17, 17, 0.65);
+  border: 1px solid rgba(255, 107, 107, 0.15);
+  border-radius: 32px;
+  padding: 3.5rem 3rem;
+  box-sizing: border-box;
+  position: relative;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 107, 107, 0.05);
+}
+
+.sos-close-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: #FFF;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sos-close-btn:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #FFF;
+  transform: rotate(90deg);
+}
+
+.sos-step-screen h2 {
+  font-size: 1.8rem;
+  color: var(--color-primary);
+  margin-bottom: 2rem;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(255, 107, 107, 0.2);
+}
+
+.sos-step-instruction {
+  font-size: 1.35rem;
+  line-height: 1.7;
+  color: #FFF;
+  margin-bottom: 3rem;
+  font-weight: 500;
+}
+
+body.bn-active .sos-step-instruction {
+  font-size: 1.5rem;
+}
+
+.sos-nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.sos-breathing-guide {
+  margin: 2.5rem 0 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.sos-breathing-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+  background: rgba(255, 107, 107, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0.85);
+  transition: transform 4s ease-in-out, box-shadow 4s ease-in-out, background-color 4s ease-in-out;
+  box-shadow: 0 0 20px rgba(255, 107, 107, 0.15);
+}
+
+.sos-breathing-circle.inhale {
+  transform: scale(1.25);
+  background-color: rgba(255, 107, 107, 0.15);
+  box-shadow: 0 0 40px 15px rgba(255, 107, 107, 0.3);
+}
+
+.sos-breathing-circle.hold {
+  transform: scale(1.25);
+  background-color: rgba(255, 107, 107, 0.15);
+  box-shadow: 0 0 40px 15px rgba(255, 107, 107, 0.3);
+}
+
+.sos-breathing-circle.exhale {
+  transform: scale(0.85);
+  background-color: rgba(255, 107, 107, 0.03);
+  box-shadow: 0 0 15px 0px rgba(255, 107, 107, 0.05);
+}
+
+.sos-breathing-circle.rest {
+  transform: scale(0.85);
+  background-color: rgba(255, 107, 107, 0.03);
+  box-shadow: 0 0 15px 0px rgba(255, 107, 107, 0.05);
+}
+
+.sos-breathe-text {
+  color: #FFF;
+  font-weight: 700;
+  font-size: 1.15rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   ZEN DRAWING BOARD
+   ========================================================================== */
+.zen-canvas-container {
+  width: 100%;
+}
+
+.canvas-wrapper {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  position: relative;
+}
+
+#zen-canvas {
+  touch-action: none; /* prevent scrolling when drawing on touch screens */
+}
+
+/* ==========================================================================
+   WORRY BURNER AND TEXT ANIMATIONS
+   ========================================================================== */
+.burner-textarea-wrapper {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.burner-textarea-wrapper.burning {
+  border-color: #E25822;
+  box-shadow: 0 0 20px rgba(226, 88, 34, 0.3);
+}
+
+.burner-ash-overlay {
+  color: var(--text-main);
+  background: var(--bg-secondary);
+  box-sizing: border-box;
+}
+
+/* Individual letter wrappers during burning */
+.ash-word {
+  display: inline-block;
+  white-space: pre-wrap;
+}
+
+.ash-char {
+  display: inline-block;
+  white-space: pre;
+  transition: color 0.6s ease;
+  transform-origin: center;
+}
+
+.ash-char.burn {
+  animation: char-ash-dissolve 2.5s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes char-ash-dissolve {
+  0% {
+    color: var(--text-main);
+    transform: translateY(0) scale(1) rotate(0deg);
+    filter: blur(0px);
+    opacity: 1;
+  }
+  15% {
+    color: #FF5722; /* flame orange */
+    text-shadow: 0 0 8px #FF5722, 0 0 15px #FFC107;
+    transform: translateY(-5px) scale(1.1) rotate(2deg);
+  }
+  30% {
+    color: #FFC107; /* yellow flame */
+    text-shadow: 0 0 12px #FFC107, 0 0 25px #FF5722;
+    transform: translateY(-12px) scale(1.05) rotate(-3deg);
+    filter: blur(0.5px);
+    opacity: 0.95;
+  }
+  55% {
+    color: #7A7A7A; /* ash grey */
+    text-shadow: none;
+    transform: translateY(-25px) scale(0.9) rotate(5deg);
+    filter: blur(2px);
+    opacity: 0.7;
+  }
+  80% {
+    color: #333333; /* dark charcoal */
+    text-shadow: none;
+    transform: translateY(-45px) scale(0.7) rotate(-8deg);
+    filter: blur(5px);
+    opacity: 0.35;
+  }
+  100% {
+    color: #111111;
+    transform: translateY(-65px) scale(0.5) rotate(12deg);
+    filter: blur(8px);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .sos-container {
+    padding: 2.5rem 1.5rem;
+    border-radius: 24px;
+  }
+  
+  .sos-step-instruction {
+    font-size: 1.15rem;
+  }
+  
+  body.bn-active .sos-step-instruction {
+    font-size: 1.3rem;
+  }
+}

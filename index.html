@@ -495,7 +495,7 @@
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
           </div>
           <h3 data-i18n="tip6Title">কখন ডাক্তারের সাহায্য নেবে?</h3>
-          <p class="short-desc" data-i18n="tip6Short">নিজেকে সাহায্য করা ভালো, কিন্তু যখন समस्याটি তোমার হাতের বাইরে চলে যায়, তখন পেশাদার পরামর্শ নেওয়া সবচেয়ে বুদ্ধিমানের কাজ।</p>
+          <p class="short-desc" data-i18n="tip6Short">নিজেকে সাহায্য করা ভালো, কিন্তু যখন সমস্যাটি তোমার হাতের বাইরে চলে যায়, তখন পেশাদার পরামর্শ নেওয়া সবচেয়ে বুদ্ধিমানের কাজ।</p>
           <div class="expanded-content" data-i18n="tip6Full">Detailed contents...</div>
           <button class="btn-expand" aria-expanded="false">
             <span data-i18n="expandBtn">বিস্তারিত জানো</span>
@@ -552,6 +552,15 @@
       <div class="section-header">
         <h2 data-i18n="toolsTitle">ইন্টারঅ্যাক্টিভ মন ভালো করার টুলস</h2>
         <p data-i18n="toolsSubtitle">যদি এই মুহূর্তে তোমার খুব অস্থির লাগে বা ভয় কাজ করে, নিচের যেকোনো একটি টুল ব্যবহার করে নিজেকে শান্ত করো।</p>
+      </div>
+
+      <!-- Panic SOS Button Card -->
+      <div class="condition-section-block reveal" id="tool-sos-block" style="margin-bottom: 3.5rem; text-align: center; border: 2px solid var(--color-primary); background: rgba(255, 107, 107, 0.03);">
+        <h3 data-i18n="toolEmergencyTitle" style="font-size: 1.8rem; color: var(--color-primary); margin-bottom: 0.5rem; font-weight: 700;">🚨 প্যানিক বাটন (Emergency SOS Reset)</h3>
+        <p data-i18n="toolEmergencyDesc" style="color: var(--text-muted); margin-bottom: 1.5rem;"></p>
+        <button class="btn-primary" id="btn-sos-trigger" style="background-color: var(--color-primary); color: #FFF; font-weight: 700; font-size: 1.2rem; padding: 1rem 2.5rem; border-radius: 30px; box-shadow: 0 8px 20px var(--glow-color); border: none; cursor: pointer;">
+          <span data-i18n="toolEmergencyBtn">ইমার্জেন্সি রিসেট (SOS)</span>
+        </button>
       </div>
 
       <!-- Worry Release Balloon Card -->
@@ -725,8 +734,43 @@
               <span id="mixer-btn-text">Play Mixer</span>
             </button>
           </div>
+
+          <!-- Zen Drawing Board Card -->
+          <div class="condition-section-block reveal" id="tool-scratch-block" style="margin-bottom: 3.5rem;">
+            <h3 data-i18n="toolScratchTitle" style="font-size: 1.8rem; color: var(--color-primary); margin-bottom: 0.5rem; font-weight: 700;">✨ জেন ড্রয়িং বোর্ড (Zen Canvas)</h3>
+            <p data-i18n="toolScratchDesc" style="color: var(--text-muted); margin-bottom: 1.5rem;"></p>
+            
+            <div class="zen-canvas-container" style="max-width: 600px; margin: 0 auto; text-align: center;">
+              <div class="canvas-wrapper" style="position: relative; border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); background: var(--bg-secondary); margin-bottom: 1.5rem; height: 320px; box-shadow: var(--shadow-sm);">
+                <canvas id="zen-canvas" style="display: block; width: 100%; height: 100%; cursor: crosshair;"></canvas>
+              </div>
+              <button class="btn-secondary" id="btn-clear-canvas" style="border-radius: 20px; padding: 0.5rem 1.5rem;">
+                <span data-i18n="toolScratchClear">মুছে ফেলো</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Worry Burner Card -->
+          <div class="condition-section-block reveal" id="tool-burn-block" style="margin-bottom: 2rem;">
+            <h3 data-i18n="toolBurnTitle" style="font-size: 1.8rem; color: var(--color-primary); margin-bottom: 0.5rem; font-weight: 700;">🔥 চিন্তা ভস্ম করার বাক্স (Worry Burner)</h3>
+            <p data-i18n="toolBurnDesc" style="color: var(--text-muted); margin-bottom: 1.5rem;"></p>
+            
+            <div class="worry-burner-container" style="max-width: 600px; margin: 0 auto; text-align: center; position: relative;">
+              <div class="burner-textarea-wrapper" id="burner-wrapper" style="position: relative; margin-bottom: 1.5rem; border-radius: 16px; border: 1px solid var(--border-color); overflow: hidden; background: var(--bg-secondary);">
+                <!-- Overlay for burning animation -->
+                <div class="burner-ash-overlay" id="worry-burn-overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 1.5rem; text-align: left; font-size: 1.1rem; line-height: 1.6; word-wrap: break-word; overflow-y: auto; pointer-events: none; z-index: 10; font-family: var(--font-body); font-style: italic;"></div>
+                
+                <textarea id="worry-burn-input" class="form-input" data-i18n-placeholder="toolBurnPlaceholder" placeholder="তোমার ক্ষোভ বা চিন্তাগুলো এখানে লেখো..." required style="width: 100%; height: 180px; border: none; border-radius: 0; background: transparent; padding: 1.5rem; font-size: 1.1rem; resize: none; outline: none; box-shadow: none; display: block; margin: 0; box-sizing: border-box;"></textarea>
+              </div>
+              
+              <button class="btn-primary" id="btn-worry-burn" style="border-radius: 20px; padding: 0.75rem 2.5rem; background-color: #E25822; border-color: #E25822; font-weight: 700; box-shadow: 0 4px 15px rgba(226, 88, 34, 0.3);">
+                <span data-i18n="toolBurnBtn">ভস্ম করো (Burn It)</span>
+              </button>
+              <p id="burn-success-msg" class="reveal" style="display: none; color: var(--color-success); font-weight: 700; margin-top: 1.5rem;" data-i18n="toolBurnSuccess"></p>
+            </div>
+          </div>
           
-        </div>
+        </section>
       </div>
       
     </section>
@@ -890,6 +934,50 @@
       <p data-i18n="contactSuccessDesc">আমাদের সাথে কথা শেয়ার করার জন্য ধন্যবাদ। আমরা ২৪ থেকে ৪৮ ঘণ্টার মধ্যে তোমার ইমেইলে উত্তর দেওয়ার চেষ্টা করবো। মনে রাখবে, তুমি একা নও।</p>
       <div class="modal-buttons-row" style="justify-content: center; margin-top: 2.5rem;">
         <button type="button" class="btn-primary btn-close-modal" data-i18n="btnClose">বন্ধ করো</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Emergency Panic SOS Fullscreen Overlay -->
+  <div class="sos-overlay-full" id="emergency-sos-overlay" style="display: none;">
+    <div class="sos-container">
+      <button class="sos-close-btn" id="btn-sos-close" aria-label="Close SOS">✕</button>
+      
+      <div class="sos-wizard-box">
+        <!-- Step 1 -->
+        <div class="sos-step-screen active" id="sos-step-1">
+          <h2 data-i18n="toolEmergencyTitle">🚨 প্যানিক বাটন (Emergency SOS Reset)</h2>
+          <p class="sos-step-instruction" data-i18n="toolEmergencyStep1">১. কাঁধ দুটো নিচে নামাও এবং চোয়াল আলগা করো। চোখ বন্ধ করো। লম্বা দম নাও।</p>
+          <button class="btn-primary btn-sos-next" data-next="2" data-i18n="toolGroundNext">পরবর্তী ধাপ →</button>
+        </div>
+        
+        <!-- Step 2 -->
+        <div class="sos-step-screen" id="sos-step-2" style="display: none;">
+          <h2 data-i18n="toolEmergencyTitle">🚨 প্যানিক বাটন (Emergency SOS Reset)</h2>
+          <p class="sos-step-instruction" data-i18n="toolEmergencyStep2">২. পায়ের পাতা দুটি মেঝের সাথে শক্ত করে চেপে বসো। অনুভব করো তুমি মাটিতে টিকে আছো, মাটি তোমাকে ধরে রেখেছে।</p>
+          <div class="sos-nav-buttons">
+            <button class="btn-secondary btn-sos-prev" data-prev="1">←</button>
+            <button class="btn-primary btn-sos-next" data-next="3" data-i18n="toolGroundNext">পরবর্তী ধাপ →</button>
+          </div>
+        </div>
+        
+        <!-- Step 3 -->
+        <div class="sos-step-screen" id="sos-step-3" style="display: none;">
+          <h2 data-i18n="toolEmergencyTitle">🚨 প্যানিক বাটন (Emergency SOS Reset)</h2>
+          <p class="sos-step-instruction" data-i18n="toolEmergencyStep3">৩. এবার আস্তে আস্তে বুক ভরে শ্বাস নাও এবং ছাড়ো। নিজেকে বলো—এটি কেবলই ভয়, এটি আমার কোনো ক্ষতি করতে পারবে না।</p>
+          
+          <!-- Breathing guide inside SOS -->
+          <div class="sos-breathing-guide">
+            <div class="sos-breathing-circle" id="sos-breathe-circle">
+              <span class="sos-breathe-text" id="sos-breathe-status">Inhale</span>
+            </div>
+          </div>
+          
+          <div class="sos-nav-buttons" style="margin-top: 1.5rem;">
+            <button class="btn-secondary btn-sos-prev" data-prev="2">←</button>
+            <button class="btn-primary" id="btn-sos-finish" data-i18n="toolEmergencyClose">আমি এখন ভালো আছি ✕</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

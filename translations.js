@@ -263,7 +263,28 @@ const translations = {
     toolMixerDesc: "কোনো ফাইল লোড করা ছাড়াই ব্রাউজারে তৈরি করুন প্রকৃতির শান্ত সুর। স্লাইডার টেনে মিক্স করে শুনুন মেডিটেশন সাউন্ড।",
     toolMixerRain: "ঝুম বৃষ্টি",
     toolMixerOcean: "সমুদ্রের ঢেউ",
-    toolMixerMeditate: "ধ্যানমগ্ন সুর"
+    toolMixerMeditate: "ধ্যানমগ্ন সুর",
+
+    // Tool 5: Panic SOS
+    toolEmergencyTitle: "🚨 প্যানিক বাটন (Emergency SOS Reset)",
+    toolEmergencyDesc: "যদি এই মুহূর্তে তীব্র ভয়ের চোটে তোমার শরীর অসাড় লাগে বা দম বন্ধ লাগে, এই লাল বোতামটি চাপো। এটি তোমাকে ৩টি অতি সহজ ধাপে শান্ত করবে।",
+    toolEmergencyBtn: "ইমার্জেন্সি রিসেট (SOS)",
+    toolEmergencyClose: "আমি এখন ভালো আছি ✕",
+    toolEmergencyStep1: "১. কাঁধ দুটো নিচে নামাও এবং চোয়াল আলগা করো। চোখ বন্ধ করো। লম্বা দম নাও।",
+    toolEmergencyStep2: "২. পায়ের পাতা দুটি মেঝের সাথে শক্ত করে চেপে বসো। অনুভব করো তুমি মাটিতে টিকে আছো, মাটি তোমাকে ধরে রেখেছে।",
+    toolEmergencyStep3: "৩. এবার আস্তে আস্তে বুক ভরে শ্বাস নাও এবং ছাড়ো। নিজেকে বলো—এটি কেবলই ভয়, এটি আমার কোনো ক্ষতি করতে পারবে না।",
+
+    // Tool 6: Zen Canvas
+    toolScratchTitle: "✨ জেন ড্রয়িং বোর্ড (Zen Canvas)",
+    toolScratchDesc: "হিজিবিজি ছবি এঁকে মনকে শান্ত করো। তোমার আঁকা রেখাগুলো মেঘের মতো একটু পরেই ক্যানভাস থেকে বাতাসে মিলিয়ে যাবে।",
+    toolScratchClear: "মুছে ফেলো",
+
+    // Tool 7: Worry Burner
+    toolBurnTitle: "🔥 চিন্তা ভস্ম করার বাক্স (Worry Burner)",
+    toolBurnDesc: "তোমার মনের ভেতরের রাগ, কষ্ট বা জমানো দুশ্চিন্তাগুলো এই বাক্সে মন খুলে লেখো। এরপর ছাই করে বাতাসে উড়িয়ে দাও।",
+    toolBurnPlaceholder: "তোমার ক্ষোভ বা চিন্তাগুলো এখানে লেখো...",
+    toolBurnBtn: "ভস্ম করো (Burn It)",
+    toolBurnSuccess: "তোমার নেতিবাচক চিন্তাগুলো ভস্ম হয়ে ছাই হয়ে উড়ে গেছে। মনকে এবার একটু শান্ত হতে দাও।"
   },
   en: {
     // Navigation
@@ -526,7 +547,28 @@ const translations = {
     toolMixerDesc: "Synthesize soothing nature sounds directly in your browser without loading any audio files. Adjust sliders to mix.",
     toolMixerRain: "Rainfall",
     toolMixerOcean: "Ocean Waves",
-    toolMixerMeditate: "Meditative Drone"
+    toolMixerMeditate: "Meditative Drone",
+
+    // Tool 5: Panic SOS
+    toolEmergencyTitle: "🚨 Emergency Panic Button (SOS Reset)",
+    toolEmergencyDesc: "If you are experiencing severe panic or physical numbness right now, click this red button. It will guide you back to safety in 3 simple steps.",
+    toolEmergencyBtn: "Emergency Reset (SOS)",
+    toolEmergencyClose: "I feel better now ✕",
+    toolEmergencyStep1: "1. Drop your shoulders and unclench your jaw. Close your eyes. Take a slow, gentle breath.",
+    toolEmergencyStep2: "2. Press your feet firmly against the floor. Feel the solid ground below holding and supporting you.",
+    toolEmergencyStep3: "3. Inhale and exhale slowly. Repeat: 'This is just a temporary alarm. I am safe, and it will pass.'",
+
+    // Tool 6: Zen Canvas
+    toolScratchTitle: "✨ Zen Drawing Board (Zen Canvas)",
+    toolScratchDesc: "Calm your mind by sketching or doodling. The lines you draw will slowly fade away like clouds in the sky.",
+    toolScratchClear: "Clear Canvas",
+
+    // Tool 7: Worry Burner
+    toolBurnTitle: "🔥 Worry Burner",
+    toolBurnDesc: "Write down your anger, sadness, or persistent worries in the box below. Then, burn them all to ashes.",
+    toolBurnPlaceholder: "Type your anger or fears here...",
+    toolBurnBtn: "Burn It",
+    toolBurnSuccess: "Your negative thoughts have burned to ashes and drifted away. Allow your mind to rest now."
   }
 };
 
