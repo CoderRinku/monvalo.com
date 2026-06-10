@@ -1444,8 +1444,8 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Failed to compute passcode hash", err);
       }
 
-      // Hash value of "admin123" is 240a10c6114e9e03d36b856a91340150b096fb2362b704c77be7e3c8808168b9
-      if (hashHex === "240a10c6114e9e03d36b856a91340150b096fb2362b704c77be7e3c8808168b9") {
+      // Hash value of "admin123" is 240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9
+      if (hashHex === "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9") {
         sessionStorage.setItem("admin_authenticated", "true");
         if (adminAuthError) adminAuthError.style.display = "none";
         adminPasscodeInput.value = "";
