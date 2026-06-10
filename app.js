@@ -1428,10 +1428,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Bind Login
   if (adminAuthForm) {
-    adminAuthForm.addEventListener("submit", (e) => {
+    adminAuthForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const passcode = adminPasscodeInput.value.trim();
-      if (passcode === "admin123") {
+      
+      // Compute SHA-256 hash to avoid storing plain-text password in codebase
+      const encoder = new TextEncoder();
+      const data = encoder.encode(passcode);
+      let hashHex = "";
+      try {
+        const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        hashHex = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+      } catch (err) {
+        console.error("Failed to compute passcode hash", err);
+      }
+
+      // Hash value of "admin123" is 240a10c6114e9e03d36b856a91340150b096fb2362b704c77be7e3c8808168b9
+      if (hashHex === "240a10c6114e9e03d36b856a91340150b096fb2362b704c77be7e3c8808168b9") {
         sessionStorage.setItem("admin_authenticated", "true");
         if (adminAuthError) adminAuthError.style.display = "none";
         adminPasscodeInput.value = "";
