@@ -1,7 +1,7 @@
 // monvalo.com translations dictionary
 // Written in a warm, empathetic, and personal tone (using "তুমি" in Bangla)
 
-const translations = {
+let translations = {
   bn: {
     // Navigation
     brandName: "monvalo",
@@ -579,7 +579,7 @@ const translations = {
 // -------------------------------------------------------------
 // EMBEDDED BLOG POSTS DATA
 // -------------------------------------------------------------
-const blogPosts = [
+let blogPosts = [
   {
     id: 1,
     category: "panic",
@@ -990,3 +990,10 @@ const blogPosts = [
     }
   }
 ];
+
+let bookPrices = {
+  1: 299,
+  2: 199,
+  3: 249,
+  4: 149
+};

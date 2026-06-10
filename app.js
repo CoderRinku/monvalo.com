@@ -1,9 +1,33 @@
 // app.js - Main Application Logic for monvalo.com
 
 document.addEventListener("DOMContentLoaded", () => {
-  // ==========================================================================
-  // STATE MANAGEMENT
-  // ==========================================================================
+  // Load custom content from localStorage if available
+  const cachedTranslations = localStorage.getItem("custom_translations");
+  const cachedBlogPosts = localStorage.getItem("custom_blogPosts");
+  const cachedBookPrices = localStorage.getItem("custom_bookPrices");
+  
+  if (cachedTranslations) {
+    try {
+      translations = JSON.parse(cachedTranslations);
+    } catch(e) {
+      console.error("Failed to load cached translations", e);
+    }
+  }
+  if (cachedBlogPosts) {
+    try {
+      blogPosts = JSON.parse(cachedBlogPosts);
+    } catch(e) {
+      console.error("Failed to load cached blog posts", e);
+    }
+  }
+  if (cachedBookPrices) {
+    try {
+      bookPrices = JSON.parse(cachedBookPrices);
+    } catch(e) {
+      console.error("Failed to load cached book prices", e);
+    }
+  }
+
   let currentLang = localStorage.getItem("lang") || "bn";
   let currentTheme = localStorage.getItem("theme") || "light";
   let resizeZenCanvas = null; // hook for routing canvas resize
@@ -260,6 +284,12 @@ document.addEventListener("DOMContentLoaded", () => {
         link.classList.remove("active");
       }
     });
+
+    if (rawHash === "#/admin") {
+      if (typeof checkAdminAuth === "function") {
+        checkAdminAuth();
+      }
+    }
   }
 
   window.addEventListener("hashchange", router);
@@ -495,10 +525,10 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // Books list details mapping
     const books = [
-      { id: 1, titleKey: "book1Title", descKey: "book1Desc", price: 299 },
-      { id: 2, titleKey: "book2Title", descKey: "book2Desc", price: 199 },
-      { id: 3, titleKey: "book3Title", descKey: "book3Desc", price: 249 },
-      { id: 4, titleKey: "book4Title", descKey: "book4Desc", price: 149 }
+      { id: 1, titleKey: "book1Title", descKey: "book1Desc", price: bookPrices[1] },
+      { id: 2, titleKey: "book2Title", descKey: "book2Desc", price: bookPrices[2] },
+      { id: 3, titleKey: "book3Title", descKey: "book3Desc", price: bookPrices[3] },
+      { id: 4, titleKey: "book4Title", descKey: "book4Desc", price: bookPrices[4] }
     ];
 
     books.forEach((book) => {
@@ -1368,6 +1398,428 @@ document.addEventListener("DOMContentLoaded", () => {
           }, 5000);
         }
       }, 3500); // 2.5s animation duration + 1s max stagger delay
+    });
+  }
+
+  // ==========================================================================
+  // ADMIN DASHBOARD CONTROLLER
+  // ==========================================================================
+  let adminTranslations = JSON.parse(JSON.stringify(translations));
+  let adminBlogPosts = JSON.parse(JSON.stringify(blogPosts));
+  let adminBookPrices = JSON.parse(JSON.stringify(bookPrices));
+
+  const adminAuth = document.getElementById("admin-auth");
+  const adminWorkspace = document.getElementById("admin-workspace");
+  const adminAuthForm = document.getElementById("admin-auth-form");
+  const adminPasscodeInput = document.getElementById("admin-passcode-input");
+  const adminAuthError = document.getElementById("admin-auth-error");
+  const adminLogoutBtn = document.getElementById("btn-admin-logout");
+
+  function checkAdminAuth() {
+    if (sessionStorage.getItem("admin_authenticated") === "true") {
+      if (adminAuth) adminAuth.style.display = "none";
+      if (adminWorkspace) adminWorkspace.style.display = "grid";
+      loadAdminWorkspace();
+    } else {
+      if (adminAuth) adminAuth.style.display = "block";
+      if (adminWorkspace) adminWorkspace.style.display = "none";
+    }
+  }
+
+  // Bind Login
+  if (adminAuthForm) {
+    adminAuthForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const passcode = adminPasscodeInput.value.trim();
+      if (passcode === "admin123") {
+        sessionStorage.setItem("admin_authenticated", "true");
+        if (adminAuthError) adminAuthError.style.display = "none";
+        adminPasscodeInput.value = "";
+        checkAdminAuth();
+      } else {
+        if (adminAuthError) adminAuthError.style.display = "block";
+      }
+    });
+  }
+
+  // Bind Logout
+  if (adminLogoutBtn) {
+    adminLogoutBtn.addEventListener("click", () => {
+      sessionStorage.removeItem("admin_authenticated");
+      checkAdminAuth();
+    });
+  }
+
+  // Tab Navigation in Admin Workspace
+  const adminTabBtns = document.querySelectorAll(".admin-menu-btn");
+  const adminTabContents = document.querySelectorAll(".admin-tab-content");
+
+  adminTabBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      adminTabBtns.forEach((b) => b.classList.remove("active"));
+      adminTabContents.forEach((c) => c.classList.remove("active"));
+
+      btn.classList.add("active");
+      const tabId = btn.getAttribute("data-tab");
+      const activeContent = document.getElementById(`tab-${tabId}`);
+      if (activeContent) activeContent.classList.add("active");
+    });
+  });
+
+  // Load Workspace Forms Data
+  function loadAdminWorkspace() {
+    // 1. General and Features Data Binding
+    const fields = document.querySelectorAll("#admin-workspace [data-trans-key]");
+    fields.forEach((field) => {
+      const key = field.getAttribute("data-trans-key");
+      const lang = field.getAttribute("data-lang");
+      if (adminTranslations[lang] && adminTranslations[lang][key] !== undefined) {
+        field.value = adminTranslations[lang][key];
+      }
+    });
+
+    // 2. Recovery Tips Editor Initial State
+    populateTipEditor();
+
+    // 3. Blog Manager Initial List
+    renderAdminBlogList();
+
+    // 4. Shop Editor Initial State
+    populateBookEditor();
+  }
+
+  // Bind General and Features Live Inputs Changes to Working Memory
+  document.querySelectorAll("#admin-workspace [data-trans-key]").forEach((field) => {
+    field.addEventListener("input", (e) => {
+      const key = field.getAttribute("data-trans-key");
+      const lang = field.getAttribute("data-lang");
+      if (adminTranslations[lang]) {
+        adminTranslations[lang][key] = e.target.value;
+      }
+    });
+  });
+
+  // Recovery Tips Manager
+  const adminTipSelector = document.getElementById("admin-tip-selector");
+  const adminTipTitleBn = document.getElementById("admin-tip-title-bn");
+  const adminTipTitleEn = document.getElementById("admin-tip-title-en");
+  const adminTipShortBn = document.getElementById("admin-tip-short-bn");
+  const adminTipShortEn = document.getElementById("admin-tip-short-en");
+  const adminTipFullBn = document.getElementById("admin-tip-full-bn");
+  const adminTipFullEn = document.getElementById("admin-tip-full-en");
+
+  function populateTipEditor() {
+    if (!adminTipSelector) return;
+    const idx = adminTipSelector.value;
+    if (adminTipTitleBn) adminTipTitleBn.value = adminTranslations.bn[`tip${idx}Title`] || "";
+    if (adminTipTitleEn) adminTipTitleEn.value = adminTranslations.en[`tip${idx}Title`] || "";
+    if (adminTipShortBn) adminTipShortBn.value = adminTranslations.bn[`tip${idx}Short`] || "";
+    if (adminTipShortEn) adminTipShortEn.value = adminTranslations.en[`tip${idx}Short`] || "";
+    if (adminTipFullBn) adminTipFullBn.value = adminTranslations.bn[`tip${idx}Full`] || "";
+    if (adminTipFullEn) adminTipFullEn.value = adminTranslations.en[`tip${idx}Full`] || "";
+  }
+
+  if (adminTipSelector) {
+    adminTipSelector.addEventListener("change", populateTipEditor);
+
+    const tipInputs = [
+      { el: adminTipTitleBn, key: "Title", lang: "bn" },
+      { el: adminTipTitleEn, key: "Title", lang: "en" },
+      { el: adminTipShortBn, key: "Short", lang: "bn" },
+      { el: adminTipShortEn, key: "Short", lang: "en" },
+      { el: adminTipFullBn, key: "Full", lang: "bn" },
+      { el: adminTipFullEn, key: "Full", lang: "en" }
+    ];
+
+    tipInputs.forEach((item) => {
+      if (item.el) {
+        item.el.addEventListener("input", (e) => {
+          const idx = adminTipSelector.value;
+          adminTranslations[item.lang][`tip${idx}${item.key}`] = e.target.value;
+        });
+      }
+    });
+  }
+
+  // Shop E-books Manager
+  const adminBookSelector = document.getElementById("admin-book-selector");
+  const adminBookPrice = document.getElementById("admin-book-price");
+  const adminBookTitleBn = document.getElementById("admin-book-title-bn");
+  const adminBookTitleEn = document.getElementById("admin-book-title-en");
+  const adminBookDescBn = document.getElementById("admin-book-desc-bn");
+  const adminBookDescEn = document.getElementById("admin-book-desc-en");
+
+  function populateBookEditor() {
+    if (!adminBookSelector) return;
+    const idx = adminBookSelector.value;
+    if (adminBookPrice) adminBookPrice.value = adminBookPrices[idx] || 0;
+    if (adminBookTitleBn) adminBookTitleBn.value = adminTranslations.bn[`book${idx}Title`] || "";
+    if (adminBookTitleEn) adminBookTitleEn.value = adminTranslations.en[`book${idx}Title`] || "";
+    if (adminBookDescBn) adminBookDescBn.value = adminTranslations.bn[`book${idx}Desc`] || "";
+    if (adminBookDescEn) adminBookDescEn.value = adminTranslations.en[`book${idx}Desc`] || "";
+  }
+
+  if (adminBookSelector) {
+    adminBookSelector.addEventListener("change", populateBookEditor);
+
+    if (adminBookPrice) {
+      adminBookPrice.addEventListener("input", (e) => {
+        const idx = adminBookSelector.value;
+        adminBookPrices[idx] = parseInt(e.target.value, 10) || 0;
+      });
+    }
+
+    const bookInputs = [
+      { el: adminBookTitleBn, key: "Title", lang: "bn" },
+      { el: adminBookTitleEn, key: "Title", lang: "en" },
+      { el: adminBookDescBn, key: "Desc", lang: "bn" },
+      { el: adminBookDescEn, key: "Desc", lang: "en" }
+    ];
+
+    bookInputs.forEach((item) => {
+      if (item.el) {
+        item.el.addEventListener("input", (e) => {
+          const idx = adminBookSelector.value;
+          adminTranslations[item.lang][`book${idx}${item.key}`] = e.target.value;
+        });
+      }
+    });
+  }
+
+  // Blog Manager Panel
+  const adminBlogListContainer = document.getElementById("admin-blog-list-container");
+  const adminBlogForm = document.getElementById("form-admin-blog");
+  const adminBlogPlaceholder = document.getElementById("blog-edit-placeholder");
+  const btnAdminBlogCreate = document.getElementById("btn-admin-blog-create");
+  const btnAdminBlogDelete = document.getElementById("btn-admin-blog-delete");
+
+  function renderAdminBlogList() {
+    if (!adminBlogListContainer) return;
+    adminBlogListContainer.innerHTML = "";
+
+    adminBlogPosts.forEach((post) => {
+      const btn = document.createElement("button");
+      btn.className = "admin-blog-item";
+      btn.type = "button";
+      btn.innerText = post.title.en || post.title.bn || `Blog #${post.id}`;
+
+      const activeId = document.getElementById("admin-blog-id").value;
+      if (activeId && parseInt(activeId, 10) === post.id) {
+        btn.classList.add("active");
+      }
+
+      btn.addEventListener("click", () => {
+        selectAdminBlog(post.id);
+      });
+
+      adminBlogListContainer.appendChild(btn);
+    });
+  }
+
+  function selectAdminBlog(id) {
+    const post = adminBlogPosts.find((p) => p.id === id);
+    if (!post) return;
+
+    document.getElementById("admin-blog-id").value = post.id;
+    document.getElementById("admin-blog-category").value = post.category;
+    document.getElementById("admin-blog-readtime-bn").value = post.readTime.bn;
+    document.getElementById("admin-blog-readtime-en").value = post.readTime.en;
+    document.getElementById("admin-blog-title-bn").value = post.title.bn;
+    document.getElementById("admin-blog-title-en").value = post.title.en;
+    document.getElementById("admin-blog-excerpt-bn").value = post.excerpt.bn;
+    document.getElementById("admin-blog-excerpt-en").value = post.excerpt.en;
+    document.getElementById("admin-blog-content-bn").value = post.content.bn;
+    document.getElementById("admin-blog-content-en").value = post.content.en;
+
+    if (adminBlogPlaceholder) adminBlogPlaceholder.style.display = "none";
+    if (adminBlogForm) adminBlogForm.style.display = "block";
+
+    // Highlight selected item in sidebar
+    document.querySelectorAll(".admin-blog-item").forEach((btn) => {
+      if (btn.innerText === (post.title.en || post.title.bn)) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
+      }
+    });
+  }
+
+  // Bind inputs inside Blog Editor to Auto-save in working copy
+  const blogFieldsCfg = [
+    { id: "admin-blog-category", key: "category", sub: null },
+    { id: "admin-blog-readtime-bn", key: "readTime", sub: "bn" },
+    { id: "admin-blog-readtime-en", key: "readTime", sub: "en" },
+    { id: "admin-blog-title-bn", key: "title", sub: "bn" },
+    { id: "admin-blog-title-en", key: "title", sub: "en" },
+    { id: "admin-blog-excerpt-bn", key: "excerpt", sub: "bn" },
+    { id: "admin-blog-excerpt-en", key: "excerpt", sub: "en" },
+    { id: "admin-blog-content-bn", key: "content", sub: "bn" },
+    { id: "admin-blog-content-en", key: "content", sub: "en" }
+  ];
+
+  blogFieldsCfg.forEach((cfg) => {
+    const el = document.getElementById(cfg.id);
+    if (el) {
+      el.addEventListener("input", (e) => {
+        const idVal = document.getElementById("admin-blog-id").value;
+        if (!idVal) return;
+        const id = parseInt(idVal, 10);
+        const post = adminBlogPosts.find((p) => p.id === id);
+        if (!post) return;
+
+        if (cfg.sub) {
+          post[cfg.key][cfg.sub] = e.target.value;
+        } else {
+          post[cfg.key] = e.target.value;
+        }
+
+        if (cfg.key === "title") {
+          renderAdminBlogList();
+        }
+      });
+    }
+  });
+
+  // Create Blog Article
+  if (btnAdminBlogCreate) {
+    btnAdminBlogCreate.addEventListener("click", () => {
+      const nextId = adminBlogPosts.length > 0 ? Math.max(...adminBlogPosts.map((p) => p.id)) + 1 : 1;
+      const newPost = {
+        id: nextId,
+        category: "panic",
+        readTime: { bn: "৫", en: "5" },
+        title: { bn: "নতুন ব্লগ নিবন্ধ", en: "New Blog Article" },
+        excerpt: { bn: "নতুন ব্লগের সংক্ষিপ্ত বিবরণ...", en: "New blog post description..." },
+        content: { bn: "<p>এখানে বাংলা কন্টেন্ট লিখুন...</p>", en: "<p>Write English content here...</p>" }
+      };
+
+      adminBlogPosts.push(newPost);
+      renderAdminBlogList();
+      selectAdminBlog(nextId);
+    });
+  }
+
+  // Delete Blog Article
+  if (btnAdminBlogDelete) {
+    btnAdminBlogDelete.addEventListener("click", () => {
+      const idVal = document.getElementById("admin-blog-id").value;
+      if (!idVal) return;
+      const id = parseInt(idVal, 10);
+
+      if (confirm("Are you sure you want to delete this blog post?")) {
+        adminBlogPosts = adminBlogPosts.filter((p) => p.id !== id);
+        document.getElementById("admin-blog-id").value = "";
+        if (adminBlogForm) adminBlogForm.style.display = "none";
+        if (adminBlogPlaceholder) adminBlogPlaceholder.style.display = "block";
+        renderAdminBlogList();
+      }
+    });
+  }
+
+  // Actions Tab Bindings
+  const btnSaveCache = document.getElementById("btn-admin-save-cache");
+  const btnExportJs = document.getElementById("btn-admin-export-js");
+  const btnResetDefaults = document.getElementById("btn-admin-reset-defaults");
+
+  // Save changes to localStorage
+  if (btnSaveCache) {
+    btnSaveCache.addEventListener("click", () => {
+      // Sync working copies to main active variables
+      translations = JSON.parse(JSON.stringify(adminTranslations));
+      blogPosts = JSON.parse(JSON.stringify(adminBlogPosts));
+      bookPrices = JSON.parse(JSON.stringify(adminBookPrices));
+
+      // Cache
+      localStorage.setItem("custom_translations", JSON.stringify(translations));
+      localStorage.setItem("custom_blogPosts", JSON.stringify(blogPosts));
+      localStorage.setItem("custom_bookPrices", JSON.stringify(bookPrices));
+
+      // Trigger translate and rendering updates
+      setLanguage(currentLang);
+      alert("All changes successfully saved in cache and applied live!");
+    });
+  }
+
+  // Reset to static code defaults
+  if (btnResetDefaults) {
+    btnResetDefaults.addEventListener("click", () => {
+      if (confirm("Are you sure you want to revert all changes? This will clear your local storage and refresh the page.")) {
+        localStorage.removeItem("custom_translations");
+        localStorage.removeItem("custom_blogPosts");
+        localStorage.removeItem("custom_bookPrices");
+        window.location.reload();
+      }
+    });
+  }
+
+  // Revert unsaved session changes back to last saved state
+  const btnRevertUnsaved = document.getElementById("btn-admin-revert-unsaved");
+  const btnRevertUnsavedSidebar = document.getElementById("btn-admin-revert-unsaved-sidebar");
+  const btnBlogRevert = document.getElementById("btn-admin-blog-revert");
+
+  function revertUnsavedChanges() {
+    const confirmMsg = currentLang === "bn"
+      ? "আপনি কি সমস্ত অসংরক্ষিত পরিবর্তন বাতিল করে শেষ সংরক্ষিত অবস্থায় ফিরে যেতে চান?"
+      : "Are you sure you want to discard all unsaved changes and revert to the last saved state?";
+    
+    if (confirm(confirmMsg)) {
+      adminTranslations = JSON.parse(JSON.stringify(translations));
+      adminBlogPosts = JSON.parse(JSON.stringify(blogPosts));
+      adminBookPrices = JSON.parse(JSON.stringify(bookPrices));
+
+      // Reset blog form view to empty state
+      const adminBlogIdEl = document.getElementById("admin-blog-id");
+      if (adminBlogIdEl) {
+        adminBlogIdEl.value = "";
+      }
+      if (adminBlogForm) {
+        adminBlogForm.style.display = "none";
+      }
+      if (adminBlogPlaceholder) {
+        adminBlogPlaceholder.style.display = "block";
+      }
+
+      loadAdminWorkspace();
+
+      const successMsg = currentLang === "bn"
+        ? "সব অসংরক্ষিত পরিবর্তন বাতিল করে পূর্বের অবস্থায় ফিরিয়ে নেওয়া হয়েছে!"
+        : "All unsaved changes have been successfully reverted!";
+      alert(successMsg);
+    }
+  }
+
+  if (btnRevertUnsaved) {
+    btnRevertUnsaved.addEventListener("click", revertUnsavedChanges);
+  }
+  if (btnRevertUnsavedSidebar) {
+    btnRevertUnsavedSidebar.addEventListener("click", revertUnsavedChanges);
+  }
+  if (btnBlogRevert) {
+    btnBlogRevert.addEventListener("click", revertUnsavedChanges);
+  }
+
+  // Export translations.js as a downloaded file
+  if (btnExportJs) {
+    btnExportJs.addEventListener("click", () => {
+      const exportString = `// monvalo.com translations dictionary
+// Written in a warm, empathetic, and personal tone (using "তুমি" in Bangla)
+
+let translations = ${JSON.stringify(adminTranslations, null, 2)};
+
+let blogPosts = ${JSON.stringify(adminBlogPosts, null, 2)};
+
+let bookPrices = ${JSON.stringify(adminBookPrices, null, 2)};
+`;
+
+      const blob = new Blob([exportString], { type: "application/javascript;charset=utf-8" });
+      const downloadUrl = URL.createObjectURL(blob);
+      const tempLink = document.createElement("a");
+      tempLink.href = downloadUrl;
+      tempLink.download = "translations.js";
+      document.body.appendChild(tempLink);
+      tempLink.click();
+      document.body.removeChild(tempLink);
+      URL.revokeObjectURL(downloadUrl);
     });
   }
 
