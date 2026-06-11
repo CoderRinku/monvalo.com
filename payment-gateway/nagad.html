@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nagad Checkout</title>
+  <style>
+    :root {
+      --nagad-orange: #F26722;
+      --nagad-dark-orange: #D14F13;
+      --bg-color: #f7f7f7;
+      --text-color: #333333;
+      --border-color: #e2e2e2;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
+
+    .nagad-container {
+      background: #ffffff;
+      width: 100%;
+      max-width: 380px;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nagad-header {
+      background-color: var(--nagad-orange);
+      color: #ffffff;
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .nagad-logo {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 0.25rem;
+    }
+
+    .nagad-subtitle {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .invoice-info {
+      background: #fff6f2;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: var(--text-color);
+    }
+
+    .invoice-info strong {
+      color: var(--nagad-orange);
+    }
+
+    .nagad-body {
+      padding: 2rem 1.5rem;
+      flex-grow: 1;
+    }
+
+    .form-step {
+      display: none;
+    }
+
+    .form-step.active {
+      display: block;
+    }
+
+    .instruction {
+      font-size: 0.95rem;
+      color: #555555;
+      margin-bottom: 1.5rem;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .input-wrapper {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .nagad-input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 1.05rem;
+      outline: none;
+      text-align: center;
+      transition: border-color 0.3s;
+    }
+
+    .nagad-input:focus {
+      border-color: var(--nagad-orange);
+    }
+
+    .nagad-btn {
+      width: 100%;
+      padding: 0.85rem;
+      background-color: var(--nagad-orange);
+      color: #ffffff;
+      font-weight: 700;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+      margin-bottom: 0.75rem;
+    }
+
+    .nagad-btn:hover {
+      background-color: var(--nagad-dark-orange);
+    }
+
+    .btn-cancel {
+      background-color: #757575;
+    }
+
+    .btn-cancel:hover {
+      background-color: #616161;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #999999;
+      margin-top: 1rem;
+    }
+
+    /* Loading Spinner */
+    .spinner {
+      border: 4px solid rgba(242, 103, 34, 0.1);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border-left-color: var(--nagad-orange);
+      animation: spin 1s linear infinite;
+      margin: 2rem auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nagad-container">
+    <div class="nagad-header">
+      <div class="nagad-logo">nagad</div>
+      <div class="nagad-subtitle">Checkout Sim</div>
+    </div>
+    
+    <div class="invoice-info">
+      <div>Invoice: <strong id="inv-label">...</strong></div>
+      <div>Amount: <strong id="amount-label">৳0</strong></div>
+    </div>
+
+    <div class="nagad-body">
+      <!-- Step 1: Wallet Number -->
+      <div class="form-step active" id="step-wallet">
+        <p class="instruction">Enter your Nagad mobile account number</p>
+        <div class="input-wrapper">
+          <input type="tel" id="input-wallet" class="nagad-input" placeholder="e.g. 01XXXXXXXXX" maxlength="11" required>
+        </div>
+        <button class="nagad-btn" id="btn-wallet-next">Proceed</button>
+        <button class="nagad-btn btn-cancel" onclick="cancelPayment()">Close</button>
+        <p class="footer-note">By clicking Proceed, you agree to the Terms & Conditions</p>
+      </div>
+
+      <!-- Step 2: Verification Code (OTP) -->
+      <div class="form-step" id="step-otp">
+        <p class="instruction">Enter 6-digit Verification Code sent to your mobile</p>
+        <div class="input-wrapper">
+          <input type="text" id="input-otp" class="nagad-input" placeholder="123456" maxlength="6" required>
+        </div>
+        <button class="nagad-btn" id="btn-otp-next">Proceed</button>
+        <button class="nagad-btn btn-cancel" onclick="cancelPayment()">Close</button>
+      </div>
+
+      <!-- Step 3: PIN -->
+      <div class="form-step" id="step-pin">
+        <p class="instruction">Enter your Nagad account 4-digit PIN</p>
+        <div class="input-wrapper">
+          <input type="password" id="input-pin" class="nagad-input" placeholder="••••" maxlength="4" required>
+        </div>
+        <button class="nagad-btn" id="btn-pin-submit">Confirm</button>
+        <button class="nagad-btn btn-cancel" onclick="cancelPayment()">Close</button>
+      </div>
+
+      <!-- Step 4: Processing -->
+      <div class="form-step" id="step-processing">
+        <p class="instruction" style="font-weight: 700;">Processing payment, please wait...</p>
+        <div class="spinner"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const invoice = params.get('invoice') || 'MOCK-INV-123';
+    const amount = params.get('amount') || '299';
+
+    document.getElementById('inv-label').innerText = invoice;
+    document.getElementById('amount-label').innerText = '৳' + amount;
+
+    // Transition references
+    const stepWallet = document.getElementById('step-wallet');
+    const stepOtp = document.getElementById('step-otp');
+    const stepPin = document.getElementById('step-pin');
+    const stepProcessing = document.getElementById('step-processing');
+
+    document.getElementById('btn-wallet-next').addEventListener('click', () => {
+      const walletVal = document.getElementById('input-wallet').value;
+      if (walletVal.length !== 11 || !walletVal.startsWith('01')) {
+        alert('Please enter a valid 11-digit mobile number starting with 01');
+        return;
+      }
+      stepWallet.classList.remove('active');
+      stepOtp.classList.add('active');
+      // Set default dummy OTP
+      document.getElementById('input-otp').value = "123456";
+    });
+
+    document.getElementById('btn-otp-next').addEventListener('click', () => {
+      const otpVal = document.getElementById('input-otp').value;
+      if (otpVal.length !== 6) {
+        alert('Please enter the 6-digit verification code');
+        return;
+      }
+      stepOtp.classList.remove('active');
+      stepPin.classList.add('active');
+    });
+
+    document.getElementById('btn-pin-submit').addEventListener('click', () => {
+      const pinVal = document.getElementById('input-pin').value;
+      if (pinVal.length < 4) {
+        alert('Please enter your account PIN');
+        return;
+      }
+
+      stepPin.classList.remove('active');
+      stepProcessing.classList.add('active');
+
+      // Generate a mock payment ID
+      const paymentID = 'TRX' + Math.random().toString(36).substr(2, 9).toUpperCase();
+
+      setTimeout(() => {
+        // Redirect to callback
+        window.location.href = `/api/payment/callback?invoice=${invoice}&status=success&paymentID=${paymentID}&method=nagad`;
+      }, 2000);
+    });
+
+    function cancelPayment() {
+      if (confirm("Are you sure you want to cancel this transaction?")) {
+        window.location.href = `/api/payment/callback?invoice=${invoice}&status=cancel&method=nagad`;
+      }
+    }
+  </script>
+</body>
+</html>

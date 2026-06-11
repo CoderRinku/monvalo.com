@@ -181,6 +181,10 @@ let translations = {
     orderSuccessTitle: "অর্ডার সফল হয়েছে! 🎉",
     orderSuccessDesc: "আমরা তোমার অর্ডারটি পেয়েছি। পরবর্তী ১০ মিনিটের মধ্যে তোমার ইমেইলে বিকাশ/নগদ পেমেন্ট লিংক এবং কিভাবে ই-বুকটি ডাউনলোড করবে তার নির্দেশিকা চলে যাবে। মন ভালো হোক!",
     btnClose: "বন্ধ করো",
+    paymentMethodTitle: "পেমেন্ট পদ্ধতি",
+    paymentSuccessTitle: "পেমেন্ট সফল হয়েছে! 🎉",
+    paymentSuccessDesc: "তোমার পেমেন্টটি সফলভাবে সম্পন্ন হয়েছে। নিচে দেওয়া বোতামে ক্লিক করে এখনই তোমার ই-বুকটি (PDF) ডাউনলোড করে নাও।",
+    btnDownload: "ডাউনলোড করুন (PDF)",
 
     book1Title: "প্যানিক ডিসঅর্ডার থেকে মুক্তি — সম্পূর্ণ গাইড",
     book1Desc: "প্যানিক অ্যাটাকের ভয়ংকর চক্র থেকে কীভাবে স্থায়ীভাবে বের হওয়া যায়, তা নিয়ে সহজ ভাষায় একটি বিস্তারিত গাইডবুক। বৈজ্ঞানিক থেরাপি সিবিটি (CBT) এবং বাস্তব অভিজ্ঞতার আলোতে লেখা।",
@@ -467,6 +471,10 @@ let translations = {
     orderSuccessTitle: "Order Placed Successfully! 🎉",
     orderSuccessDesc: "We have received your order. A secure bKash/Nagad payment link and instructions to download your PDF will arrive in your email inbox within the next 10 minutes. Stay well!",
     btnClose: "Close",
+    paymentMethodTitle: "Payment Method",
+    paymentSuccessTitle: "Payment Successful! 🎉",
+    paymentSuccessDesc: "Your payment has been successfully completed. Click the button below to download your e-book (PDF) now.",
+    btnDownload: "Download PDF",
 
     book1Title: "Overcoming Panic Disorder — Complete Guide",
     book1Desc: "A detailed guidebook written in simple language explaining how to permanently break the terrifying cycle of panic attacks. Based on Cognitive Behavioral Therapy (CBT) and real-life recovery.",

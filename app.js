@@ -242,6 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function router() {
     const rawHash = window.location.hash || "#/";
+    const hashPath = rawHash.split('?')[0];
     
     // Reset blog reader view by default
     if (blogReaderView) {
@@ -252,8 +253,8 @@ document.addEventListener("DOMContentLoaded", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 
     // Handle subpage routing (e.g., #/blog/1)
-    if (rawHash.startsWith("#/blog/")) {
-      const postId = parseInt(rawHash.split("#/blog/")[1], 10);
+    if (hashPath.startsWith("#/blog/")) {
+      const postId = parseInt(hashPath.split("#/blog/")[1], 10);
       if (!isNaN(postId)) {
         renderFullBlogArticle(postId);
         return;
@@ -265,7 +266,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const id = sec.getAttribute("id");
       const targetHash = `#/${id === "home" ? "" : id}`;
       
-      if (rawHash === targetHash) {
+      if (hashPath === targetHash) {
         sec.classList.add("active");
         if (id === "tools" && typeof resizeZenCanvas === "function") {
           setTimeout(resizeZenCanvas, 50);
@@ -278,16 +279,50 @@ document.addEventListener("DOMContentLoaded", () => {
     // Highlight active link
     navLinks.forEach((link) => {
       const href = link.getAttribute("href");
-      if (rawHash === href) {
+      if (hashPath === href) {
         link.classList.add("active");
       } else {
         link.classList.remove("active");
       }
     });
 
-    if (rawHash === "#/admin") {
+    if (hashPath === "#/admin") {
       if (typeof checkAdminAuth === "function") {
         checkAdminAuth();
+      }
+    }
+
+    // Handle payment success/fail redirect callback checks
+    if (rawHash.includes('?')) {
+      const queryString = rawHash.split('?')[1];
+      const urlParams = new URLSearchParams(queryString);
+      const status = urlParams.get('status');
+      const bookId = urlParams.get('bookId');
+
+      if (status === 'success') {
+        const paymentSuccessModal = document.getElementById("payment-success-modal");
+        const downloadBtn = document.getElementById("btn-download-ebook");
+        
+        if (paymentSuccessModal && downloadBtn) {
+          // Set correct download path based on bookId
+          const pdfFiles = {
+            1: "panic_disorder_guide.pdf",
+            2: "anxiety_workbook.pdf",
+            3: "conquer_fears.pdf",
+            4: "panic_sos_toolkit.pdf"
+          };
+          const fileName = pdfFiles[bookId] || "monvalo_ebook.pdf";
+          downloadBtn.href = `/assets/${fileName}`;
+          
+          // Show modal
+          paymentSuccessModal.classList.add("active");
+        }
+        
+        // Clean URL hash to avoid showing success modal repeatedly on refresh
+        window.history.replaceState(null, null, window.location.pathname + window.location.search + "#/shop");
+      } else if (status === 'fail') {
+        alert(currentLang === 'bn' ? 'দুঃখিত, আপনার পেমেন্টটি ব্যর্থ হয়েছে। দয়া করে আবার চেষ্টা করুন।' : 'Sorry, your payment failed. Please try again.');
+        window.history.replaceState(null, null, window.location.pathname + window.location.search + "#/shop");
       }
     }
   }
@@ -615,14 +650,58 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Close checkout modal
-      if (checkoutModal) checkoutModal.classList.remove("active");
-      checkoutForm.reset();
+      // Get payment method & details
+      const methodEl = document.querySelector('input[name="payment-method"]:checked');
+      const method = methodEl ? methodEl.value : "bkash";
+      const amount = bookPrices[selectedBookId] || 299;
 
-      // Show success modal
-      if (orderSuccessModal) {
-        orderSuccessModal.classList.add("active");
+      const submitBtn = document.getElementById("btn-submit-order");
+      const originalText = submitBtn ? submitBtn.innerHTML : "";
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = currentLang === 'bn' ? 'রিডাইরেক্ট করা হচ্ছে...' : 'Redirecting...';
       }
+
+      // Call payment creation API
+      fetch("/api/payment/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          bookId: selectedBookId,
+          amount,
+          method
+        })
+      })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("HTTP error " + res.status);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (data.success && data.redirectUrl) {
+          checkoutForm.reset();
+          if (checkoutModal) checkoutModal.classList.remove("active");
+          // Redirect to payment gateway
+          window.location.href = data.redirectUrl;
+        } else {
+          throw new Error("Payment initiation failed");
+        }
+      })
+      .catch((err) => {
+        console.error("Payment error:", err);
+        alert(currentLang === 'bn' ? 'পেমেন্ট শুরু করতে সমস্যা হয়েছে। দয়া করে আবার চেষ্টা করুন।' : 'Failed to initiate payment. Please try again.');
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+        }
+      });
     });
   }
 

@@ -1,0 +1,12 @@
+{
+  "name": "monvalo",
+  "version": "1.0.0",
+  "description": "Bilingual Mental Health Platform",
+  "main": "app.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "mongodb": "^6.3.0"
+  }
+}
